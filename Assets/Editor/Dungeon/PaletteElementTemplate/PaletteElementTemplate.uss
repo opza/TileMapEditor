@@ -1,0 +1,16 @@
+﻿#element-container{
+	flex-direction: column;
+}
+
+#element-button{
+	width: 75px;
+	height: 75px;
+}
+
+#sub-container{
+	flex-direction: row;
+}
+
+#element-name{
+	font-size: 15px;
+}

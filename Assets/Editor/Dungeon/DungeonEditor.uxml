@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
+>
+  <engine:VisualElement name="root-panel">
+    <engine:Box name="main-panel">
+      <editor:Vector2IntField name="size-field"/>
+      <engine:VisualElement name="main-button-panel">
+        <engine:Button name="build-button" text="생성"/>
+        <engine:Button text="저장"/>
+      </engine:VisualElement>
+      <engine:ScrollView name="tile-panel" mode="VerticalAndHorizontal"/>
+    </engine:Box>
+
+    <engine:Box name="palette-panel">
+      <engine:VisualElement>
+        <engine:Button text="추가" name="add-palette-button"/>
+        <engine:Button text="가져오기"/>
+        <engine:Button text="저장"/>
+      </engine:VisualElement>
+      <engine:ScrollView name="palette-element-panel"/>
+    </engine:Box>
+  </engine:VisualElement>
+  
+</engine:UXML>
