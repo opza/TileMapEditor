@@ -23,11 +23,6 @@
     font-size: 10px;
 }
 
-#tile-panel Button{
-    width: 100px;
-    height: 100px;
-}
-
 #palette-panel{
     width: 20%;
 }

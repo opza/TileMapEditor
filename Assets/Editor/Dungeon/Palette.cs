@@ -10,7 +10,8 @@ namespace Editor.Dungeon
     [CreateAssetMenu(fileName = "DungeonPalette", menuName = "DungeonEditor/Palette")]
     public class Palette : ScriptableObject, IEnumerable<Palette.Element>
     {
-        public event Action changedElementEvent;
+        public event Action addElementEvent;
+        public event Action removeElementEvent;
 
         List<Element> elements = new List<Element>();
 
@@ -21,7 +22,7 @@ namespace Editor.Dungeon
             var element = new Element(name, texture2D);
             elements.Add(element);
 
-            changedElementEvent?.Invoke();
+            addElementEvent?.Invoke();
         }  
 
         public void Remove(int index)
@@ -31,7 +32,7 @@ namespace Editor.Dungeon
 
             elements.RemoveAt(index);
 
-            changedElementEvent?.Invoke();
+            removeElementEvent?.Invoke();
         }
 
         public void Remove(Element element)
@@ -41,7 +42,7 @@ namespace Editor.Dungeon
 
             elements.Remove(element);
 
-            changedElementEvent?.Invoke();
+            removeElementEvent?.Invoke();
         }
 
         public IEnumerator<Element> GetEnumerator()

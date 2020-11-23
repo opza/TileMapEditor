@@ -65,14 +65,18 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\Dungeon\BuildPaletteElementEditor\BuildPaletteElementEditor.cs" />
     <Compile Include="Assets\Editor\Dungeon\DungeonEditor.cs" />
+    <Compile Include="Assets\Editor\Dungeon\DungeonEditor_BuildMenu.cs" />
+    <Compile Include="Assets\Editor\Dungeon\DungeonEditor_PaletteMenu.cs" />
     <Compile Include="Assets\Editor\Dungeon\Palette.cs" />
     <Compile Include="Assets\Editor\Extention.cs" />
     <None Include="Assets\Editor\Dungeon\DungeonEditor.uxml" />
     <None Include="Assets\Editor\Dungeon\PaletteElementTemplate\PaletteElementTemplate.uxml" />
     <None Include="Assets\Editor\Dungeon\PaletteElementTemplate\PaletteElementTemplate.uss" />
+    <None Include="Assets\Editor\Dungeon\BuildTileTemplate\BuildTileTemplate.uxml" />
     <None Include="Assets\Editor\Dungeon\BuildPaletteElementEditor\BuildPaletteElementEditor.uss" />
     <None Include="Assets\Editor\Dungeon\DungeonEditor.uss" />
     <None Include="Assets\Editor\Dungeon\BuildPaletteElementEditor\BuildPaletteElementEditor.uxml" />
+    <None Include="Assets\Editor\Dungeon\BuildTileTemplate\BuildTileTemplate.uss" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

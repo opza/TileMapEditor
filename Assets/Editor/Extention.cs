@@ -37,10 +37,25 @@ namespace Editor
             });
         }
 
-        public static void CreateGrid(this VisualElement parent, int width, int height, Func<VisualElement> elementCreator)
+        public static void CreateGridButton(this VisualElement parent, int width, int heigth, VisualTreeAsset buttonTemplate, StyleSheet styleSheet = null, Action<Button> onClicked = null)
+        {
+            parent.CreateGrid(width, heigth, () =>
+            {
+                var template = buttonTemplate.CloneTree();
+                var button = template.Query<Button>().First();
+                button.clickable.clicked += () => onClicked(button);
+
+                return button;
+            }, styleSheet);
+        }
+
+        public static void CreateGrid(this VisualElement parent, int width, int height, Func<VisualElement> elementCreator, StyleSheet styleSheet = null)
         {
             if (width <= 0 || height <= 0)
                 return;
+
+            if (styleSheet != null)
+                parent.styleSheets.Add(styleSheet);
 
             var rowFlex = new StyleEnum<FlexDirection>();
             rowFlex.value = FlexDirection.Row;
