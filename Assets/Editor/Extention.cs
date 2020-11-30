@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 using UnityEngine;
 using UnityEditor;
@@ -9,6 +10,18 @@ using UnityEditor.UIElements;
 
 namespace Editor
 {
+    public static class Path
+    {
+        public static string ConvertUnityRelativePath(string absoultePath)
+        {
+            var matchedPath = Regex.Match(absoultePath, @"Assets/.*");
+            if (!matchedPath.Success)
+                return string.Empty;
+
+            return matchedPath.Value;
+        }
+    }
+
     public static class Loader
     {
         public static VisualTreeAsset LoadUxml(string path)
@@ -26,9 +39,10 @@ namespace Editor
 
     public static class Extention
     {
-        public static void CreateGirdButton(this VisualElement parent, int width, int height, Action<Button> onClicked = null)
+
+        public static VisualElement[,] CreateGridButton(this VisualElement parent, int width, int height, Action<Button> onClicked = null)
         {
-            parent.CreateGrid(width, height, () =>
+            return parent.CreateGrid(width, height, (x, y) =>
             {
                 var button = new Button();
                 button.clickable.clicked += () => onClicked(button);
@@ -37,22 +51,24 @@ namespace Editor
             });
         }
 
-        public static void CreateGridButton(this VisualElement parent, int width, int heigth, VisualTreeAsset buttonTemplate, StyleSheet styleSheet = null, Action<Button> onClicked = null)
+        public static VisualElement[,] CreateGridButton(this VisualElement parent, int width, int heigth, VisualTreeAsset buttonTemplate, StyleSheet styleSheet = null, Action<Button, int, int> onClicked = null)
         {
-            parent.CreateGrid(width, heigth, () =>
+            return parent.CreateGrid(width, heigth, (x, y) =>
             {
                 var template = buttonTemplate.CloneTree();
                 var button = template.Query<Button>().First();
-                button.clickable.clicked += () => onClicked(button);
+                button.clickable.clicked += () => onClicked(button, x, y);
 
                 return button;
             }, styleSheet);
         }
 
-        public static void CreateGrid(this VisualElement parent, int width, int height, Func<VisualElement> elementCreator, StyleSheet styleSheet = null)
+        public static VisualElement[,] CreateGrid(this VisualElement parent, int width, int height, Func<int, int, VisualElement> elementCreator, StyleSheet styleSheet = null)
         {
+            var gridElements = new VisualElement[width, height];
+
             if (width <= 0 || height <= 0)
-                return;
+                return gridElements;
 
             if (styleSheet != null)
                 parent.styleSheets.Add(styleSheet);
@@ -68,11 +84,15 @@ namespace Editor
 
                 for (int x = 0; x < width; x++)
                 {
-                    widthPanel.Add(elementCreator());
+                    var element = elementCreator(x, y);
+                    gridElements[x, y] = element;
+                    widthPanel.Add(element);
                 }
 
                 parent.Add(widthPanel);
             }
+
+            return gridElements;
         }
     }
 }
