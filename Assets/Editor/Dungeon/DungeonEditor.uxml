@@ -9,17 +9,18 @@
     <engine:Box name="main-panel">
       <editor:Vector2IntField name="size-field"/>
       <engine:VisualElement name="main-button-panel">
-        <engine:Button name="build-button" text="새로 만들기 "/>
+        <engine:Button name="build-tiles-button" text="새로 만들기"/>
         <engine:Button name="load-tile-button" text="불러오기"/>
+        <engine:Button name="resize-tile-button" text="Resize"/>
       </engine:VisualElement>
       <engine:ScrollView name="tile-panel" mode="VerticalAndHorizontal"/>
     </engine:Box>
 
     <engine:Box name="palette-panel">
       <engine:VisualElement>
-        <engine:Button text="추가" name="add-palette-button"/>
-        <engine:Button text="가져오기"/>
-        <engine:Button text="저장"/>
+        <engine:Button name="build-palette-button" text="새로 만들기"/>
+        <engine:Button name="add-palette-button" text="추가"/>
+        <engine:Button name="load-palette-button" text="불러오기"/>
       </engine:VisualElement>
       <engine:ScrollView name="palette-element-panel"/>
     </engine:Box>

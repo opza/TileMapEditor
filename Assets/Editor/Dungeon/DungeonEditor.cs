@@ -1,10 +1,11 @@
 using System;
+using System.Linq;
 
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-using System.Linq;
+
 
 namespace Editor.Dungeon
 {
@@ -27,7 +28,7 @@ namespace Editor.Dungeon
 
         BuildPaletteElementEditor buildPaletteElementEditor;
 
-        Palette palette;
+        
         SelectedItem<Palette.Element> selectedPaletteEelment;
 
         [MenuItem("Window/DungeonEditor")]

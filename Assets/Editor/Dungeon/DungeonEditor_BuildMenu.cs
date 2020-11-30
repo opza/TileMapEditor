@@ -19,14 +19,16 @@ namespace Editor.Dungeon
 
         Button buildButton;
         Button loadButton;
+        Button resizeButton;
 
         void SetBuildMenu(VisualElement root)
         {
             gridSizeField = root.Query<Vector2IntField>("size-field").First();
             gridTilePanel = root.Query<VisualElement>("tile-panel").First();
 
-            buildButton = root.Query<Button>("build-button").First();
+            buildButton = root.Query<Button>("build-tiles-button").First();
             loadButton = root.Query<Button>("load-tile-button").First();
+            resizeButton = root.Query<Button>("resize-tile-button").First();
 
             buildButton.clickable.clicked += () =>
             {      
@@ -39,6 +41,13 @@ namespace Editor.Dungeon
             {
                 var loadPath = EditorUtility.OpenFilePanel("Room 불러오기", Application.dataPath, "asset");
                 room = LoadRoom(loadPath);
+
+                UpdateBuildMenu();
+            };
+
+            resizeButton.clickable.clicked += () =>
+            {
+                room?.SetSize(gridSizeField.value.x, gridSizeField.value.y);
 
                 UpdateBuildMenu();
             };
@@ -66,8 +75,10 @@ namespace Editor.Dungeon
             if (string.IsNullOrEmpty(relativePath))
                 return null;
 
-            return AssetDatabase.LoadAssetAtPath<Room>(relativePath);
+            var loadedRoom = AssetDatabase.LoadAssetAtPath<Room>(relativePath);
+            loadedRoom.updateEvent += UpdateBuildMenu;
 
+            return loadedRoom;
         }
 
         void UpdateBuildMenu()
