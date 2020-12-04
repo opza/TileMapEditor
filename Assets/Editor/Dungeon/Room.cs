@@ -1,4 +1,6 @@
-﻿using System;
+﻿// TODO : 프리뷰 텍스쳐가 변함;;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,12 +9,18 @@ using Editor.Dungeon;
 using System.Collections;
 using System.IO.IsolatedStorage;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 
-public class Room : ScriptableObject
+[Serializable]
+public class Room : ScriptableObject, ISerializationCallbackReceiver
 {
     public event Action updateEvent;
 
     Tile[,] tiles;
+
+    [SerializeField]
+    Serializable2dArray serializableTiles;
+
 
     public Tile this[int x, int y]=>GetTile(x,y);
 
@@ -89,19 +97,35 @@ public class Room : ScriptableObject
             return false;
 
         return true;
-    } 
+    }
+
+    public void OnBeforeSerialize()
+    {
+        serializableTiles = new Serializable2dArray(tiles);
+    }
+
+    public void OnAfterDeserialize()
+    {
+        tiles = serializableTiles?.To2dArray();
+    }
 
     [Serializable]
     public class Tile
     {
-        public Texture2D Texture2D { get; protected set; }
-        public string Name { get; protected set; }
+        [SerializeField]
+        Texture2D texture2D;
+        public Texture2D Texture2D => texture2D;
+
+        [SerializeField]
+        string name;
+        public string Name => name;
+
 
         public static Tile Create(Palette.Element paletteElement)
         {
             var tile = new Tile();
-            tile.Texture2D = paletteElement.Texture2D;
-            tile.Name = paletteElement.Name;
+            tile.texture2D = paletteElement.Texture2D;
+            tile.name = paletteElement.Name;     
 
             return tile;
         }
@@ -113,4 +137,6 @@ public class Room : ScriptableObject
 
         private Tile() { }
     }
+
+    
 }

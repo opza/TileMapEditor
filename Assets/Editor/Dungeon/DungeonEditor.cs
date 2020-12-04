@@ -49,13 +49,7 @@ namespace Editor.Dungeon
             buildTileTree = Loader.LoadUxml(BUILD_TILE_UXML_PATH);
             buildTileStyleSheet = Loader.LoadUss(BUILD_TILE_USS_PATH);
 
-            selectedPaletteEelment = new SelectedItem<Palette.Element>();
-
-            palette = new Palette();
-            palette.addElementEvent += UpdatePaletteMenu;
-
-            palette.removeElementEvent += RemoveSelectedItem;
-            palette.removeElementEvent += UpdatePaletteMenu;
+            selectedPaletteEelment = new SelectedItem<Palette.Element>();           
 
             SetBuildMenu(root);
             SetPaletteMenu(root);

@@ -11,6 +11,8 @@ namespace Editor.Dungeon
 {
     public partial class DungeonEditor
     {
+        readonly string PALETTE_FILE_EXTENTION = "asset";
+
         Palette palette;
 
         VisualElement paletteElementPanel;
@@ -48,7 +50,7 @@ namespace Editor.Dungeon
 
             loadPaletteButton.clickable.clicked += () =>
             {
-                var loadPath = EditorUtility.OpenFilePanel("Palette 불러오기", Application.dataPath, "asset");
+                var loadPath = EditorUtility.OpenFilePanel("Palette 불러오기", Application.dataPath, PALETTE_FILE_EXTENTION);
 
                 palette = LoadPalette(loadPath);
                 InitPaletteEvent(palette);
@@ -61,7 +63,7 @@ namespace Editor.Dungeon
         {
             var palette = CreateInstance<Palette>();
 
-            var savePath = EditorUtility.SaveFilePanel("Palette 생성", Application.dataPath, "NewPalette", "asset");
+            var savePath = EditorUtility.SaveFilePanel("Palette 생성", Application.dataPath, "NewPalette", PALETTE_FILE_EXTENTION);
             var relativePath = Path.ConvertUnityRelativePath(savePath);
             if (string.IsNullOrEmpty(relativePath))
                 return null;

@@ -12,3 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9e05d33e12b0b4abe8dd45a4f82fed, type: 3}
   m_Name: NewRoom
   m_EditorClassIdentifier: 
+  serializableTiles:
+    serializableArray:
+    - texture2D: {fileID: 0}
+      name: 
+    - texture2D: {fileID: 0}
+      name: 
+    - texture2D: {fileID: 0}
+      name: 
+    - texture2D: {fileID: 0}
+      name: 
+    - texture2D: {fileID: 0}
+      name: 
+    - texture2D: {fileID: 0}
+      name: 
+    - texture2D: {fileID: 0}
+      name: 
+    - texture2D: {fileID: 0}
+      name: 
+    - texture2D: {fileID: 0}
+      name: 
+    xSize: 3
+    ySize: 3

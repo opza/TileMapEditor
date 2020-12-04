@@ -12,6 +12,8 @@ namespace Editor.Dungeon
 {
     public partial class DungeonEditor
     {
+        readonly string ROOM_FILE_EXTENTION = "asset";
+
         Room room; 
 
         Vector2IntField gridSizeField;
@@ -39,7 +41,7 @@ namespace Editor.Dungeon
 
             loadButton.clickable.clicked += () =>
             {
-                var loadPath = EditorUtility.OpenFilePanel("Room 불러오기", Application.dataPath, "asset");
+                var loadPath = EditorUtility.OpenFilePanel("Room 불러오기", Application.dataPath, ROOM_FILE_EXTENTION);
                 room = LoadRoom(loadPath);
 
                 UpdateBuildMenu();
@@ -59,7 +61,7 @@ namespace Editor.Dungeon
             room.SetSize(width, height);
             room.updateEvent += UpdateBuildMenu;
 
-            var savePath = EditorUtility.SaveFilePanel("Room 생성", Application.dataPath, "NewRoom", "asset");
+            var savePath = EditorUtility.SaveFilePanel("Room 생성", Application.dataPath, "NewRoom", ROOM_FILE_EXTENTION);
             var relativePath = Path.ConvertUnityRelativePath(savePath);
             if (string.IsNullOrEmpty(relativePath))
                 return null;
@@ -89,6 +91,9 @@ namespace Editor.Dungeon
 
             var gridElements = gridTilePanel.CreateGridButton(room.Width, room.Height, buildTileTree, buildTileStyleSheet, OnClickedEvnet);
             DrawGridButton(gridElements);
+
+            if (GUI.changed)
+                EditorUtility.SetDirty(room);
         }
 
         void DrawGridButton(VisualElement[,] elements)
