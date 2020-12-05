@@ -65,13 +65,11 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\Dungeon\BuildPaletteElementEditor\BuildPaletteElementEditor.cs" />
     <Compile Include="Assets\Editor\Dungeon\DungeonEditor.cs" />
-    <Compile Include="Assets\Editor\Dungeon\DungeonEditor_BuildMenu.cs" />
     <Compile Include="Assets\Editor\Dungeon\DungeonEditor_PaletteMenu.cs" />
-    <Compile Include="Assets\Editor\Dungeon\Palette.cs" />
-    <Compile Include="Assets\Editor\Dungeon\Room.cs" />
-    <Compile Include="Assets\Editor\Dungeon\RoomInspector.cs" />
+    <Compile Include="Assets\Editor\Dungeon\DungeonEditor_TileMenu.cs" />
+    <Compile Include="Assets\Editor\Dungeon\Inspector\PaletteInspector.cs" />
+    <Compile Include="Assets\Editor\Dungeon\Inspector\RoomInspector.cs" />
     <Compile Include="Assets\Editor\Extention.cs" />
-    <Compile Include="Assets\Editor\Serializable2dArray.cs" />
     <None Include="Assets\Editor\Dungeon\DungeonEditor.uxml" />
     <None Include="Assets\Editor\Dungeon\PaletteElementTemplate\PaletteElementTemplate.uxml" />
     <None Include="Assets\Editor\Dungeon\PaletteElementTemplate\PaletteElementTemplate.uss" />
@@ -723,7 +721,12 @@
       <HintPath>C:/Users/mingu/Desktop/Code/Game/DungeonEditor/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{B7A283E0-72DA-00A4-8124-02D82A193EF6}</Project>
+      <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

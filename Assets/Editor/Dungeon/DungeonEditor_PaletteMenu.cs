@@ -13,7 +13,7 @@ namespace Editor.Dungeon
     {
         readonly string PALETTE_FILE_EXTENTION = "asset";
 
-        Palette palette;
+        Palette currentPalette;
 
         VisualElement paletteElementPanel;
 
@@ -31,13 +31,13 @@ namespace Editor.Dungeon
 
             buildPaletteButton.clickable.clicked += () =>
             {
-                palette = CreatePalette();
-                InitPaletteEvent(palette);
+                currentPalette = CreatePalette();             
+                UpdatePaletteMenu();
             };
 
             addPaletteButton.clickable.clicked += () =>
             {
-                if (palette == null)
+                if (currentPalette == null)
                     return;
 
                 var buildPaletteElementEditor = GetWindow<BuildPaletteElementEditor>();
@@ -52,34 +52,35 @@ namespace Editor.Dungeon
             {
                 var loadPath = EditorUtility.OpenFilePanel("Palette 불러오기", Application.dataPath, PALETTE_FILE_EXTENTION);
 
-                palette = LoadPalette(loadPath);
-                InitPaletteEvent(palette);
-
+                currentPalette = LoadPalette(loadPath);
                 UpdatePaletteMenu();
             };
         }
 
         Palette CreatePalette()
         {
-            var palette = CreateInstance<Palette>();
+            var newPalette = CreateInstance<Palette>();
 
             var savePath = EditorUtility.SaveFilePanel("Palette 생성", Application.dataPath, "NewPalette", PALETTE_FILE_EXTENTION);
             var relativePath = Path.ConvertUnityRelativePath(savePath);
             if (string.IsNullOrEmpty(relativePath))
-                return null;
-            else
-                AssetDatabase.CreateAsset(palette, relativePath);
+                return currentPalette;
+            
+            AssetDatabase.CreateAsset(newPalette, relativePath);
 
-            return palette;
+            InitPaletteEvent(newPalette);
+
+            return newPalette;
         }
 
         Palette LoadPalette(string path)
         {
             var relativePath = Path.ConvertUnityRelativePath(path);
             if (string.IsNullOrEmpty(relativePath))
-                return null;
+                return currentPalette;
 
             var loadedPalette = AssetDatabase.LoadAssetAtPath<Palette>(relativePath);
+            InitPaletteEvent(loadedPalette);
 
             return loadedPalette;
         }
@@ -106,18 +107,21 @@ namespace Editor.Dungeon
             if (string.IsNullOrEmpty(elementName))
                 elementName = elementTexture.name;
 
-            palette.Add(elementName, elementTexture);
+            currentPalette.Add(elementName, elementTexture);
         }
 
         void RemovePaletteElement(Palette.Element element)
         {
-            palette.Remove(element);
+            currentPalette.Remove(element);
         }
 
         void UpdatePaletteMenu()
         {
+            if (currentPalette == null)
+                return;
+
             paletteElementPanel.Clear();
-            foreach (var element in palette)
+            foreach (var element in currentPalette)
             {
                 var elementTemplate = paletteElementTree.CloneTree();
                 elementTemplate.styleSheets.Add(paletteElementStyleSheet);
@@ -141,7 +145,7 @@ namespace Editor.Dungeon
             if (selectedPaletteEelment.IsEmpty)
                 return;
 
-            if (!palette.Contains(selectedPaletteEelment.Value))
+            if (!currentPalette.Contains(selectedPaletteEelment.Value))
                 selectedPaletteEelment.SetEmpty();
         }
     }
