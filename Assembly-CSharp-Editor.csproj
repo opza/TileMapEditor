@@ -69,7 +69,8 @@
     <Compile Include="Assets\Editor\Dungeon\DungeonEditor_TileMenu.cs" />
     <Compile Include="Assets\Editor\Dungeon\Inspector\PaletteInspector.cs" />
     <Compile Include="Assets\Editor\Dungeon\Inspector\RoomInspector.cs" />
-    <Compile Include="Assets\Editor\Extention.cs" />
+    <Compile Include="Assets\Editor\Utility\Extention.cs" />
+    <Compile Include="Assets\Editor\Utility\Utils.cs" />
     <None Include="Assets\Editor\Dungeon\DungeonEditor.uxml" />
     <None Include="Assets\Editor\Dungeon\PaletteElementTemplate\PaletteElementTemplate.uxml" />
     <None Include="Assets\Editor\Dungeon\PaletteElementTemplate\PaletteElementTemplate.uss" />

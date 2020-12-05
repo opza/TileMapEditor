@@ -5,12 +5,15 @@ using System.Diagnostics;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.WSA;
 
 namespace Editor.Dungeon
 {
     [CreateAssetMenu(fileName = "DungeonPalette", menuName = "DungeonEditor/Palette")]
     public class Palette : ScriptableObject, IEnumerable<Palette.Element>
     {
+        readonly static int MIN_ARRAY_INDEX = 0;
+
         public event Action addElementEvent;
         public event Action removeElementEvent;
 
@@ -21,11 +24,11 @@ namespace Editor.Dungeon
 
         public int Count => elements.Count;
 
-        public void Add(string name, Texture2D texture2D)
+        public void Add(string name, Texture2D texture2D, Element.TileType type)
         {
             elements.RemoveAll(e => e.Name == name);
 
-            var element = Element.Create(name, texture2D);
+            var element = Element.Create(name, texture2D, type);
             elements.Add(element);
 
             addElementEvent?.Invoke();
@@ -39,7 +42,7 @@ namespace Editor.Dungeon
 
         public void Remove(int index)
         {
-            if (index <= 0 || index >= elements.Count)
+            if (MIN_ARRAY_INDEX <= 0 || index >= elements.Count)
                 return;
 
             elements.RemoveAt(index);
@@ -60,6 +63,8 @@ namespace Editor.Dungeon
         [Serializable]
         public class Element
         {
+            public enum TileType {Empty, Block, Door }
+
             [SerializeField]
             string name;
             public string Name => name;
@@ -68,23 +73,31 @@ namespace Editor.Dungeon
             Texture2D texture2D;
             public Texture2D Texture2D => texture2D;
 
-            public static Element Create(string name, Texture2D texture2d)
+            [SerializeField]
+            TileType type;
+            public TileType Type => type;
+
+            public static Element Create(string name, Texture2D texture2d, TileType type)
             {
-                return new Element(name, texture2d);
+                return new Element(name, texture2d, type);
             }
 
             public static Element CreateEmpty()
             {
-                return new Element();
+                return new Element(TileType.Empty);
             }
 
-            Element(string name, Texture2D texture2d)
+            Element(string name, Texture2D texture2D, TileType type)
             {
+                this.type = type;
                 this.name = name;
-                this.texture2D = texture2d;
+                this.texture2D = texture2D;
             }
 
-            Element() { }
+            Element(TileType type)
+            {
+                this.type = type;
+            }
         }    
     }
 }

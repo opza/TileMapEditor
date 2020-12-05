@@ -2,6 +2,10 @@
 	flex-direction: column;
 }
 
+#main-container{
+	flex-direction: row;
+}
+
 #element-button{
 	width: 75px;
 	height: 75px;

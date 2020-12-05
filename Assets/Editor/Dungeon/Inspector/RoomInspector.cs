@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+using Editor.Utility;
+using TMPro;
+
 [CustomEditor(typeof(Room))]
 public class RoomInspector : UnityEditor.Editor
 {
@@ -35,4 +38,12 @@ public class RoomInspector : UnityEditor.Editor
             }
         }
     }
+
+   // public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
+   //{
+   //     var icon = new Texture2D(width, height);
+   //     EditorUtility.CopySerialized(this.icon, icon);
+
+   //     return icon;
+   // }
 }

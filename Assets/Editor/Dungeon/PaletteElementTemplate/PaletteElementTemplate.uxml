@@ -6,7 +6,10 @@
     xsi:noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
 >
   <engine:VisualElement name="element-container">
-    <engine:Button name="element-button"/>
+    <engine:VisualElement name="main-container">
+      <engine:Button name="element-button"/>
+      <DropdownButton xmlns="UnityEditor.PackageManager.UI" name="element-type-dropwown"/>
+    </engine:VisualElement> 
     <engine:VisualElement name="sub-container">
       <engine:Button name="remove-button" text="X"/>
       <engine:Label name="element-name" text="name"/>

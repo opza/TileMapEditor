@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System.Data;
 
+using Editor.Utility;
 
 namespace Editor.Dungeon
 {
@@ -89,6 +90,12 @@ namespace Editor.Dungeon
                 return currentRoom;
 
             var loadedRoom = AssetDatabase.LoadAssetAtPath<Room>(relativePath);
+            if (loadedRoom == null)
+            {
+                Debug.LogError($"옳바른 형식이 아닙니다 {System.IO.Path.GetFileName(relativePath)}");
+                return currentRoom;
+            }
+
             InitRoom(loadedRoom);
 
             return loadedRoom;

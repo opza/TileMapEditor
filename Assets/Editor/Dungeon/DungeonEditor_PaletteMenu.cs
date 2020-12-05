@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using UnityEditor;
@@ -62,7 +63,7 @@ namespace Editor.Dungeon
             var newPalette = CreateInstance<Palette>();
 
             var savePath = EditorUtility.SaveFilePanel("Palette 생성", Application.dataPath, "NewPalette", PALETTE_FILE_EXTENTION);
-            var relativePath = Path.ConvertUnityRelativePath(savePath);
+            var relativePath = Utility.Path.ConvertUnityRelativePath(savePath);
             if (string.IsNullOrEmpty(relativePath))
                 return currentPalette;
             
@@ -75,11 +76,17 @@ namespace Editor.Dungeon
 
         Palette LoadPalette(string path)
         {
-            var relativePath = Path.ConvertUnityRelativePath(path);
+            var relativePath = Utility.Path.ConvertUnityRelativePath(path);
             if (string.IsNullOrEmpty(relativePath))
                 return currentPalette;
 
             var loadedPalette = AssetDatabase.LoadAssetAtPath<Palette>(relativePath);
+            if(loadedPalette == null)
+            {
+                Debug.LogError($"옳바른 형식이 아닙니다 {System.IO.Path.GetFileName(relativePath)}");
+                return currentPalette;
+            }
+
             InitPaletteEvent(loadedPalette);
 
             return loadedPalette;
@@ -107,7 +114,7 @@ namespace Editor.Dungeon
             if (string.IsNullOrEmpty(elementName))
                 elementName = elementTexture.name;
 
-            currentPalette.Add(elementName, elementTexture);
+            currentPalette.Add(elementName, elementTexture, Palette.Element.TileType.Empty);
         }
 
         void RemovePaletteElement(Palette.Element element)
