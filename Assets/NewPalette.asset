@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: NewPalette
   m_EditorClassIdentifier: 
   elements:
-  - name: 
-    texture2D: {fileID: 0}
-    type: 0
+  - {fileID: 0}

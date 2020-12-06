@@ -38,12 +38,12 @@ public class Room : ScriptableObject, ISerializationCallbackReceiver
         updateEvent?.Invoke();
     }
 
-    public void SetTile(Palette.Element element, int x, int y)
+    public void SetTile(BlockInfo blockInfo, int x, int y)
     {
         if (!Inside(x, y))
             return;
 
-        tiles[x, y] = Tile.Create(element);
+        tiles[x, y] = Tile.Create(blockInfo);
         updateEvent?.Invoke();
     }
 
@@ -114,19 +114,16 @@ public class Room : ScriptableObject, ISerializationCallbackReceiver
     public class Tile
     {
         [SerializeField]
-        Texture2D texture2D;
-        public Texture2D Texture2D => texture2D;
+        BlockInfo blockInfo;
 
-        [SerializeField]
-        string name;
-        public string Name => name;
+        public BlockInfo BlockInfo => blockInfo;
 
-
-        public static Tile Create(Palette.Element paletteElement)
+        public static Tile Create(BlockInfo blockInfo)
         {
-            var tile = new Tile();
-            tile.texture2D = paletteElement.Texture2D;
-            tile.name = paletteElement.Name;     
+            var tile = new Tile()
+            {
+                blockInfo = blockInfo
+            };
 
             return tile;
         }

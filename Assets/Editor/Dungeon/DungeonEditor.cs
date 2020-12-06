@@ -27,11 +27,8 @@ namespace Editor.Dungeon
 
         VisualTreeAsset buildTileTree;
         StyleSheet buildTileStyleSheet;
-
-        BuildPaletteElementEditor buildPaletteElementEditor;
-
-        
-        SelectedItem<Palette.Element> selectedPaletteEelment;
+   
+        SelectedItem<BlockInfo> selectedPaletteEelment;
 
         [MenuItem("Window/DungeonEditor")]
         public static void ShowWindow()
@@ -51,7 +48,7 @@ namespace Editor.Dungeon
             buildTileTree = Loader.LoadUxml(BUILD_TILE_UXML_PATH);
             buildTileStyleSheet = Loader.LoadUss(BUILD_TILE_USS_PATH);
 
-            selectedPaletteEelment = new SelectedItem<Palette.Element>();           
+            selectedPaletteEelment = new SelectedItem<BlockInfo>();           
 
             SetBuildMenu(root);
             SetPaletteMenu(root);

@@ -13,6 +13,7 @@ namespace Editor.Dungeon
     public partial class DungeonEditor
     {
         readonly string PALETTE_FILE_EXTENTION = "asset";
+        readonly string BLOCK_INFO_FILE_EXTENTION = "asset";
 
         Palette currentPalette;
 
@@ -41,12 +42,12 @@ namespace Editor.Dungeon
                 if (currentPalette == null)
                     return;
 
-                var buildPaletteElementEditor = GetWindow<BuildPaletteElementEditor>();
-                if (this.buildPaletteElementEditor == null)
-                {
-                    this.buildPaletteElementEditor = buildPaletteElementEditor;
-                    buildPaletteElementEditor.AddElementButton.clickable.clicked += AddPaletteElement;
-                }
+                var loadPath = EditorUtility.OpenFilePanel("BlockInfo 불러오기", Application.dataPath, BLOCK_INFO_FILE_EXTENTION);
+                var loadedBlockInfo = LoadBlockInfo(loadPath);
+                if (loadedBlockInfo == null)
+                    return;
+
+                currentPalette.Add(loadedBlockInfo);
             };
 
             loadPaletteButton.clickable.clicked += () =>
@@ -72,6 +73,23 @@ namespace Editor.Dungeon
             InitPaletteEvent(newPalette);
 
             return newPalette;
+        }
+
+        BlockInfo LoadBlockInfo(string path)
+        {
+            var relativePath = Utility.Path.ConvertUnityRelativePath(path);
+            if (string.IsNullOrEmpty(relativePath))
+                return null;
+
+            var loadedBlockInfo = AssetDatabase.LoadAssetAtPath<BlockInfo>(relativePath);
+            if(loadedBlockInfo == null)
+            {
+                Debug.LogError($"옳바른 형식이 아닙니다 {System.IO.Path.GetFileName(relativePath)}");
+                return null;
+            }
+
+            return loadedBlockInfo;
+
         }
 
         Palette LoadPalette(string path)
@@ -103,23 +121,9 @@ namespace Editor.Dungeon
             palette.removeElementEvent += UpdatePaletteMenu;
         }
 
-        void AddPaletteElement()
+        void RemovePaletteElement(BlockInfo blockInfo)
         {
-            var elementName = buildPaletteElementEditor.NameField.value;
-            var elementTexture = buildPaletteElementEditor.ObjectField.value as Texture2D;
-
-            if (elementTexture == null)
-                return;
-
-            if (string.IsNullOrEmpty(elementName))
-                elementName = elementTexture.name;
-
-            currentPalette.Add(elementName, elementTexture, Palette.Element.TileType.Empty);
-        }
-
-        void RemovePaletteElement(Palette.Element element)
-        {
-            currentPalette.Remove(element);
+            currentPalette.Remove(blockInfo);
         }
 
         void UpdatePaletteMenu()
@@ -128,20 +132,20 @@ namespace Editor.Dungeon
                 return;
 
             paletteElementPanel.Clear();
-            foreach (var element in currentPalette)
+            foreach (var blockInfo in currentPalette)
             {
                 var elementTemplate = paletteElementTree.CloneTree();
                 elementTemplate.styleSheets.Add(paletteElementStyleSheet);
 
                 var elementButton = elementTemplate.Query<Button>("element-button").First();
-                elementButton.style.backgroundImage = new StyleBackground(element.Texture2D);
-                elementButton.clickable.clicked += () => { selectedPaletteEelment.Value = element; };
+                elementButton.style.backgroundImage = new StyleBackground(blockInfo.Texture2D);
+                elementButton.clickable.clicked += () => { selectedPaletteEelment.Value = blockInfo; };
 
                 var removeButton = elementTemplate.Query<Button>("remove-button").First();
-                removeButton.clickable.clicked += () => RemovePaletteElement(element);
+                removeButton.clickable.clicked += () => RemovePaletteElement(blockInfo);
 
                 var elementName = elementTemplate.Query<Label>("element-name").First();
-                elementName.text = element.Name;
+                elementName.text = blockInfo.Name;
 
                 paletteElementPanel.Add(elementTemplate);
             }

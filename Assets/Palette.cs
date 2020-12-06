@@ -10,7 +10,7 @@ using UnityEngine.WSA;
 namespace Editor.Dungeon
 {
     [CreateAssetMenu(fileName = "DungeonPalette", menuName = "DungeonEditor/Palette")]
-    public class Palette : ScriptableObject, IEnumerable<Palette.Element>
+    public class Palette : ScriptableObject, IEnumerable<BlockInfo>
     {
         readonly static int MIN_ARRAY_INDEX = 0;
 
@@ -18,39 +18,45 @@ namespace Editor.Dungeon
         public event Action removeElementEvent;
 
         [SerializeField]
-        List<Element> elements = new List<Element>() { Element.CreateEmpty() };
+        List<BlockInfo> elements = new List<BlockInfo>();
 
-        public Element this[int i] => elements[i];
+        public BlockInfo this[int i] => elements[i];
 
         public int Count => elements.Count;
 
-        public void Add(string name, Texture2D texture2D, Element.TileType type)
+        void Awake()
         {
-            elements.RemoveAll(e => e.Name == name);
+            var emptyBlockInfo = CreateInstance<BlockInfo>();
+            elements.Add(emptyBlockInfo);
+        }
 
-            var element = Element.Create(name, texture2D, type);
-            elements.Add(element);
+        public void Add(BlockInfo blockInfo)
+        {
+            if (elements.Contains(blockInfo))
+                return;
+
+            elements.Add(blockInfo);
 
             addElementEvent?.Invoke();
-        }  
+        }
 
-        public void Remove(Element element)
+        public void Remove(BlockInfo element)
         {
             var idx = elements.IndexOf(element);
             Remove(idx);
         }
 
-        public void Remove(int index)
+        public void Remove(int idx)
         {
-            if (MIN_ARRAY_INDEX <= 0 || index >= elements.Count)
+            if (idx <= MIN_ARRAY_INDEX || idx >= elements.Count)
                 return;
 
-            elements.RemoveAt(index);
+            elements.RemoveAt(idx);
 
             removeElementEvent?.Invoke();
         }
 
-        public IEnumerator<Element> GetEnumerator()
+        public IEnumerator<BlockInfo> GetEnumerator()
         {
             return elements.GetEnumerator();
         }
@@ -60,44 +66,6 @@ namespace Editor.Dungeon
             return elements.GetEnumerator();
         }
 
-        [Serializable]
-        public class Element
-        {
-            public enum TileType {Empty, Block, Door }
-
-            [SerializeField]
-            string name;
-            public string Name => name;
-
-            [SerializeField]
-            Texture2D texture2D;
-            public Texture2D Texture2D => texture2D;
-
-            [SerializeField]
-            TileType type;
-            public TileType Type => type;
-
-            public static Element Create(string name, Texture2D texture2d, TileType type)
-            {
-                return new Element(name, texture2d, type);
-            }
-
-            public static Element CreateEmpty()
-            {
-                return new Element(TileType.Empty);
-            }
-
-            Element(string name, Texture2D texture2D, TileType type)
-            {
-                this.type = type;
-                this.name = name;
-                this.texture2D = texture2D;
-            }
-
-            Element(TileType type)
-            {
-                this.type = type;
-            }
-        }    
+           
     }
 }

@@ -135,7 +135,7 @@ namespace Editor.Dungeon
                 for (int y = 0; y < currentRoom.Height; y++)
                 {
                     var button = elements[x, y] as Button;
-                    button.style.backgroundImage = currentRoom[x, y].Texture2D;
+                    button.style.backgroundImage = currentRoom[x, y].BlockInfo?.Texture2D;
                 }
             }
         }
