@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 [Serializable]
 [CreateAssetMenu(fileName ="BlockInfo", menuName ="DungeonEditor/BlockInfo")]
@@ -21,5 +22,13 @@ public class BlockInfo : ScriptableObject
     [SerializeField]
     TileType type;
     public TileType Type => type;
+
+    [SerializeField]
+    Light2D light2D;
+
+    void Test()
+    {
+        
+    }
 }
 
