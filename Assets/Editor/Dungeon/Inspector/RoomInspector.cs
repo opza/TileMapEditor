@@ -31,10 +31,10 @@ public class RoomInspector : UnityEditor.Editor
                 textureRect.position = texturePos;
 
                 var tile = room.GetTile(x, y);
-                if (tile?.BlockInfo?.Texture2D == null)
+                if (tile?.BlockInfo?.PreviewTexture == null)
                     continue;
 
-                EditorGUI.DrawPreviewTexture(textureRect, tile.BlockInfo.Texture2D);
+                EditorGUI.DrawPreviewTexture(textureRect, tile.BlockInfo.PreviewTexture);
             }
         }
     }

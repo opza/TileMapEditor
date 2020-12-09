@@ -16,19 +16,23 @@ public class BlockInfo : ScriptableObject
     public string Name => name;
 
     [SerializeField]
-    Texture2D texture2D;
-    public Texture2D Texture2D => texture2D;
+    Texture2D previewTexture;
+    public Texture2D PreviewTexture => previewTexture;
+
+    Sprite sprite;
+    public Sprite Sprite
+    {
+        get
+        {
+            if (sprite == null)
+                sprite = Sprite.Create(previewTexture, new Rect(0, 0, previewTexture.width, previewTexture.height), new Vector2(.5f, .5f));
+
+            return sprite;
+        }
+    }
 
     [SerializeField]
     TileType type;
     public TileType Type => type;
-
-    [SerializeField]
-    Light2D light2D;
-
-    void Test()
-    {
-        
-    }
 }
 

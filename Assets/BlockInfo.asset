@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f33e715292b974d82c4581a918a43e, type: 3}
   m_Name: BlockInfo
   m_EditorClassIdentifier: 
-  name: Block
-  texture2D: {fileID: 2800000, guid: 964d11cdef153fb42be5dc1d2551daef, type: 3}
-  type: 1
+  name: 
+  texture2D: {fileID: 0}
+  type: 0

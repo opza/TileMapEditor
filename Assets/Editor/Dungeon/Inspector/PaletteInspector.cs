@@ -28,10 +28,10 @@ public class PaletteInspector : UnityEditor.Editor
             textureRect.position = texturePos;
 
             var blockInfo = palette[i];
-            if (blockInfo?.Texture2D == null)
+            if (blockInfo?.PreviewTexture == null)
                 continue;
 
-            EditorGUI.DrawPreviewTexture(textureRect, blockInfo.Texture2D);
+            EditorGUI.DrawPreviewTexture(textureRect, blockInfo.PreviewTexture);
         }
     }
 

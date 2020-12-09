@@ -138,7 +138,7 @@ namespace Editor.Dungeon
                 elementTemplate.styleSheets.Add(paletteElementStyleSheet);
 
                 var elementButton = elementTemplate.Query<Button>("element-button").First();
-                elementButton.style.backgroundImage = new StyleBackground(blockInfo.Texture2D);
+                elementButton.style.backgroundImage = new StyleBackground(blockInfo.PreviewTexture);
                 elementButton.clickable.clicked += () => { selectedPaletteEelment.Value = blockInfo; };
 
                 var removeButton = elementTemplate.Query<Button>("remove-button").First();
