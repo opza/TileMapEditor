@@ -63,10 +63,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Block.cs" />
-    <Compile Include="Assets\BlockInfo.cs" />
-    <Compile Include="Assets\Palette.cs" />
-    <Compile Include="Assets\Room.cs" />
+    <Compile Include="Assets\Scripts\Extention.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\BlockInfo.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\MapSet.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\Palette.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\Room.cs" />
+    <Compile Include="Assets\Scripts\Util.cs" />
+    <Compile Include="Assets\Scripts\World\Block.cs" />
+    <Compile Include="Assets\Scripts\World\BlockManager.cs" />
+    <Compile Include="Assets\Scripts\World\Event\ChangeBlockSpriteArgs.cs" />
+    <Compile Include="Assets\Scripts\World\Event\CreateBlcokObjectArgs.cs" />
+    <Compile Include="Assets\Scripts\World\MapGenerator.cs" />
+    <Compile Include="Assets\Scripts\World\Tile.cs" />
+    <Compile Include="Assets\Scripts\World\TileSet.cs" />
+    <Compile Include="Assets\Scripts\World\World.cs" />
+    <Compile Include="Assets\Scripts\World\WorldManager.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

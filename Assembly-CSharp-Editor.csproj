@@ -68,6 +68,8 @@
     <Compile Include="Assets\Editor\Dungeon\DungeonEditor_TileMenu.cs" />
     <Compile Include="Assets\Editor\Dungeon\Inspector\PaletteInspector.cs" />
     <Compile Include="Assets\Editor\Dungeon\Inspector\RoomInspector.cs" />
+    <Compile Include="Assets\Editor\TileSet\TileDrawer.cs" />
+    <Compile Include="Assets\Editor\TileSet\TileSetInspector.cs" />
     <Compile Include="Assets\Editor\Utility\Extention.cs" />
     <Compile Include="Assets\Editor\Utility\Utils.cs" />
     <None Include="Assets\Editor\Dungeon\DungeonEditor.uxml" />
