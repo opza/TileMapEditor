@@ -23,7 +23,7 @@ namespace Worlds
             this.height = height;
 
             tiles = CreateWorldTiles(width, height);
-            SetWorldTilesNeighbor();
+            SetWorldTilesNeighbor(tiles);
         }
 
         public Tile GetTile(Vector2 pos)
@@ -56,7 +56,7 @@ namespace Worlds
             return tiles;
         }
 
-        void SetWorldTilesNeighbor()
+        void SetWorldTilesNeighbor(Tile[,] tiles)
         {
             foreach (var tile in tiles)
             {

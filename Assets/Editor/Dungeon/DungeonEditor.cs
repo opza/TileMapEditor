@@ -66,11 +66,13 @@ namespace Editor.Dungeon
         class SelectedItem<T> where T : class
         {
             
-            public T Value { get; set; }
+            public T Value { get; protected set; }
 
 
             public bool IsEmpty => Value == null;
             public void SetEmpty() => Value = null;
+
+            public void SetValue(T value) => Value = value;
             
         }
 

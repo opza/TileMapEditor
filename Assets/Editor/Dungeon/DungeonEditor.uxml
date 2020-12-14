@@ -12,6 +12,7 @@
         <engine:Button name="build-tiles-button" text="새로 만들기"/>
         <engine:Button name="load-tile-button" text="불러오기"/>
         <engine:Button name="resize-tile-button" text="Resize"/>
+        <engine:Button name="set-door-button" text="Set Door"/>
       </engine:VisualElement>
       <engine:ScrollView name="tile-panel" mode="VerticalAndHorizontal"/>
     </engine:Box>

@@ -14,8 +14,7 @@ namespace Editor.Dungeon
     {
         readonly static int MIN_ARRAY_INDEX = 0;
 
-        public event Action addElementEvent;
-        public event Action removeElementEvent;
+        public event Action updateElementEvent;
 
         [SerializeField]
         List<BlockInfo> elements = new List<BlockInfo>();
@@ -37,7 +36,7 @@ namespace Editor.Dungeon
 
             elements.Add(blockInfo);
 
-            addElementEvent?.Invoke();
+            updateElementEvent?.Invoke();
         }
 
         public void Remove(BlockInfo element)
@@ -53,7 +52,7 @@ namespace Editor.Dungeon
 
             elements.RemoveAt(idx);
 
-            removeElementEvent?.Invoke();
+            updateElementEvent?.Invoke();
         }
 
         public IEnumerator<BlockInfo> GetEnumerator()

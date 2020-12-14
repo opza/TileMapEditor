@@ -115,15 +115,7 @@ namespace Editor.Dungeon
             if (palette == null)
                 return;
 
-            palette.addElementEvent += UpdatePaletteMenu;
-
-            palette.removeElementEvent += RemoveSelectedItem;
-            palette.removeElementEvent += UpdatePaletteMenu;
-        }
-
-        void RemovePaletteElement(BlockInfo blockInfo)
-        {
-            currentPalette.Remove(blockInfo);
+            palette.updateElementEvent += UpdatePaletteMenu;
         }
 
         void UpdatePaletteMenu()
@@ -139,7 +131,7 @@ namespace Editor.Dungeon
 
                 var elementButton = elementTemplate.Query<Button>("element-button").First();
                 elementButton.style.backgroundImage = new StyleBackground(blockInfo.PreviewTexture);
-                elementButton.clickable.clicked += () => { selectedPaletteEelment.Value = blockInfo; };
+                elementButton.clickable.clicked += () => { selectedPaletteEelment.SetValue(blockInfo); };
 
                 var removeButton = elementTemplate.Query<Button>("remove-button").First();
                 removeButton.clickable.clicked += () => RemovePaletteElement(blockInfo);
@@ -151,13 +143,13 @@ namespace Editor.Dungeon
             }
         }
 
-        void RemoveSelectedItem()
+        void RemovePaletteElement(BlockInfo blockInfo)
         {
-            if (selectedPaletteEelment.IsEmpty)
-                return;
+            currentPalette.Remove(blockInfo);
 
             if (!currentPalette.Contains(selectedPaletteEelment.Value))
                 selectedPaletteEelment.SetEmpty();
         }
+
     }
 }

@@ -11,7 +11,7 @@ using Worlds;
 [CreateAssetMenu(fileName ="BlockInfo", menuName ="DungeonEditor/BlockInfo")]
 public class BlockInfo : ScriptableObject
 {
-    public enum TileType { Empty, Block, Door }
+    public enum TileType { Empty, Block }
 
     [SerializeField]
     new string name;

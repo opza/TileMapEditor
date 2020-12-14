@@ -25,6 +25,9 @@ namespace Editor.Dungeon
         Button buildButton;
         Button loadButton;
         Button resizeButton;
+        Button setDoorButton;
+
+        bool isDoorMode;
 
         void SetBuildMenu(VisualElement root)
         {
@@ -34,6 +37,7 @@ namespace Editor.Dungeon
             buildButton = root.Query<Button>("build-tiles-button").First();
             loadButton = root.Query<Button>("load-tile-button").First();
             resizeButton = root.Query<Button>("resize-tile-button").First();
+            setDoorButton = root.Query<Button>("set-door-button").First();
 
             buildButton.clickable.clicked += () =>
             {      
@@ -61,6 +65,11 @@ namespace Editor.Dungeon
                 currentRoom?.SetSize(width, height);
 
                 UpdateBuildMenu();
+            };
+
+            setDoorButton.clickable.clicked += () =>
+            {
+                SetDoorMode();
             };
         }
 
@@ -101,6 +110,13 @@ namespace Editor.Dungeon
             return loadedRoom;
         }
 
+        public void SetDoorMode()
+        {
+            isDoorMode = true;
+            selectedPaletteEelment.SetEmpty();
+        }
+
+
         void InitRoom(Room room)
         {
             room.updateEvent += UpdateBuildMenu;
@@ -136,16 +152,37 @@ namespace Editor.Dungeon
                 {
                     var button = elements[x, y] as Button;
                     button.style.backgroundImage = currentRoom[x, y].BlockInfo?.PreviewTexture;
+
+                    if(currentRoom[x,y]?.IsDoor == true)
+                        button.style.backgroundColor = new StyleColor(Color.black);
                 }
             }
         }
 
+        // TODO : Door 모드일겨우, 아닐경우 2가지 일이 섞여있음, 고쳐야함
         void OnClickedEvnet(Button button, int x, int y)
+        {
+            SetTile(button, x, y);
+            SetDoor(x, y);
+        }
+
+        void SetTile(Button button, int x, int y)
         {
             if (selectedPaletteEelment.IsEmpty)
                 return;
-     
+
             currentRoom.SetTile(selectedPaletteEelment.Value, x, y);
+        }
+
+        void SetDoor(int x, int y)
+        {
+            if (!isDoorMode || !selectedPaletteEelment.IsEmpty)
+            {
+                isDoorMode = false;
+                return;
+            }
+
+            currentRoom.SwitchDoor(x, y);
         }
     }
 }
