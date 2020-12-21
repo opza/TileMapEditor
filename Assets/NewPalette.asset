@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: NewPalette
   m_EditorClassIdentifier: 
   elements:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}

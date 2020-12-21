@@ -7,7 +7,6 @@ using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Tilemaps;
 using Worlds;
 
-[Serializable]
 [CreateAssetMenu(fileName ="BlockInfo", menuName ="DungeonEditor/BlockInfo")]
 public class BlockInfo : ScriptableObject
 {
@@ -32,5 +31,6 @@ public class BlockInfo : ScriptableObject
     [SerializeField]
     GameObject light;
     public GameObject Light => light;
+
 }
 

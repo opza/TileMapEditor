@@ -23,12 +23,6 @@ namespace Editor.Dungeon
 
         public int Count => elements.Count;
 
-        void Awake()
-        {
-            var emptyBlockInfo = CreateInstance<BlockInfo>();
-            elements.Add(emptyBlockInfo);
-        }
-
         public void Add(BlockInfo blockInfo)
         {
             if (elements.Contains(blockInfo))

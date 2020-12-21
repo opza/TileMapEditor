@@ -37,5 +37,33 @@ namespace Util
 
             return b;
         }
+
+        public static T[] RandomSwap<T>(this T[] array)
+        {
+            
+
+            var swapArray = array.Clone() as T[];
+
+            if (array.Length <= 1)
+                return swapArray;
+            
+            var random = new Random(Environment.TickCount);
+
+            for (int i = array.Length - 1; i > 0 ; i--)
+            {
+                var ranValue = random.Next(i);
+                Swap(swapArray, ranValue, i);
+            }
+
+            return swapArray;
+
+        }
+
+        public static void Swap<T>(T[] swapArray, int idxA, int idxB)
+        {
+            var temp = swapArray[idxA];
+            swapArray[idxB] = swapArray[idxA];
+            swapArray[idxB] = temp;
+        }
     }
 }

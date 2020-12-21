@@ -15,24 +15,24 @@ namespace Editor.Utility
     public static class Extention
     {
 
-        public static VisualElement[,] CreateGridButton(this VisualElement parent, int width, int height, Action<Button> onClicked = null)
+        public static VisualElement[,] CreateGridButton(this VisualElement parent, int width, int height, Action onClicked = null)
         {
             return parent.CreateGrid(width, height, (x, y) =>
             {
                 var button = new Button();
-                button.clickable.clicked += () => onClicked(button);
+                button.clickable.clicked += () => onClicked();
 
                 return button;
             });
         }
 
-        public static VisualElement[,] CreateGridButton(this VisualElement parent, int width, int heigth, VisualTreeAsset buttonTemplate, StyleSheet styleSheet = null, Action<Button, int, int> onClicked = null)
+        public static VisualElement[,] CreateGridButton(this VisualElement parent, int width, int heigth, VisualTreeAsset buttonTemplate, StyleSheet styleSheet = null, Action<int, int> onClicked = null)
         {
             return parent.CreateGrid(width, heigth, (x, y) =>
             {
                 var template = buttonTemplate.CloneTree();
                 var button = template.Query<Button>().First();
-                button.clickable.clicked += () => onClicked(button, x, y);
+                button.clickable.clicked += () => onClicked?.Invoke(x, y);
 
                 return button;
             }, styleSheet);

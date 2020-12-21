@@ -25,9 +25,10 @@ namespace Editor.Dungeon
         Button buildButton;
         Button loadButton;
         Button resizeButton;
+        Button removeButton;
         Button setDoorButton;
 
-        bool isDoorMode;
+        Action<int, int> currentTileEvent;
 
         void SetBuildMenu(VisualElement root)
         {
@@ -35,8 +36,9 @@ namespace Editor.Dungeon
             gridTilePanel = root.Query<VisualElement>("tile-panel").First();
 
             buildButton = root.Query<Button>("build-tiles-button").First();
-            loadButton = root.Query<Button>("load-tile-button").First();
+            loadButton = root.Query<Button>("load-tiles-button").First();
             resizeButton = root.Query<Button>("resize-tile-button").First();
+            removeButton = root.Query<Button>("remove-tile-button").First();
             setDoorButton = root.Query<Button>("set-door-button").First();
 
             buildButton.clickable.clicked += () =>
@@ -67,9 +69,16 @@ namespace Editor.Dungeon
                 UpdateBuildMenu();
             };
 
+            removeButton.clickable.clicked += () =>
+            {
+                selectedPaletteEelment.Clear();
+                currentTileEvent = SetTile;
+            };
+
             setDoorButton.clickable.clicked += () =>
             {
-                SetDoorMode();
+                selectedPaletteEelment.Clear();
+                currentTileEvent = SetDoor;
             };
         }
 
@@ -110,12 +119,6 @@ namespace Editor.Dungeon
             return loadedRoom;
         }
 
-        public void SetDoorMode()
-        {
-            isDoorMode = true;
-            selectedPaletteEelment.SetEmpty();
-        }
-
 
         void InitRoom(Room room)
         {
@@ -128,7 +131,7 @@ namespace Editor.Dungeon
             if (currentRoom == null)
                 return;
 
-            var gridElements = gridTilePanel.CreateGridButton(currentRoom.Width, currentRoom.Height, buildTileTree, buildTileStyleSheet, OnClickedEvnet);
+            var gridElements = gridTilePanel.CreateGridButton(currentRoom.Width, currentRoom.Height, buildTileTree, buildTileStyleSheet, OnClickTileButton);
             DrawGridButton(gridElements);
 
             if (GUI.changed)
@@ -159,29 +162,18 @@ namespace Editor.Dungeon
             }
         }
 
-        // TODO : Door 모드일겨우, 아닐경우 2가지 일이 섞여있음, 고쳐야함
-        void OnClickedEvnet(Button button, int x, int y)
+        void OnClickTileButton(int x, int y)
         {
-            SetTile(button, x, y);
-            SetDoor(x, y);
+            currentTileEvent?.Invoke(x, y);
         }
 
-        void SetTile(Button button, int x, int y)
+        void SetTile(int x, int y)
         {
-            if (selectedPaletteEelment.IsEmpty)
-                return;
-
             currentRoom.SetTile(selectedPaletteEelment.Value, x, y);
         }
 
         void SetDoor(int x, int y)
         {
-            if (!isDoorMode || !selectedPaletteEelment.IsEmpty)
-            {
-                isDoorMode = false;
-                return;
-            }
-
             currentRoom.SwitchDoor(x, y);
         }
     }

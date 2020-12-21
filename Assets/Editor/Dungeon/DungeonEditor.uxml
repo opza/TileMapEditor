@@ -5,13 +5,15 @@
     xmlns:editor="UnityEditor.UIElements"
     xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
 >
+  <Style src="Assets/Editor/Dungeon/DungeonEditor.uss"/>
   <engine:VisualElement name="root-panel">
     <engine:Box name="main-panel">
       <editor:Vector2IntField name="size-field"/>
       <engine:VisualElement name="main-button-panel">
         <engine:Button name="build-tiles-button" text="새로 만들기"/>
-        <engine:Button name="load-tile-button" text="불러오기"/>
+        <engine:Button name="load-tiles-button" text="불러오기"/>
         <engine:Button name="resize-tile-button" text="Resize"/>
+        <engine:Button name="remove-tile-button" text="Remove Tile"/>
         <engine:Button name="set-door-button" text="Set Door"/>
       </engine:VisualElement>
       <engine:ScrollView name="tile-panel" mode="VerticalAndHorizontal"/>

@@ -17,6 +17,7 @@ namespace Worlds
         void Start()
         {
             world = new World(100, 100);
+            new MapGenerator(world, "MapSets").Generate("MapSet");
         }
 
         // Update is called once per frame

@@ -20,7 +20,7 @@ namespace Editor.Dungeon
         VisualElement paletteElementPanel;
 
         Button buildPaletteButton;
-        Button addPaletteButton;
+        Button loadBlockInfoPaletteButton;
         Button loadPaletteButton;
 
         void SetPaletteMenu(VisualElement root)
@@ -28,16 +28,16 @@ namespace Editor.Dungeon
             paletteElementPanel = root.Query<VisualElement>("palette-element-panel").First();
 
             buildPaletteButton = root.Query<Button>("build-palette-button").First();
-            addPaletteButton = root.Query<Button>("add-palette-button").First();
+            loadBlockInfoPaletteButton = root.Query<Button>("add-palette-button").First();
             loadPaletteButton = root.Query<Button>("load-palette-button").First();
 
             buildPaletteButton.clickable.clicked += () =>
             {
                 currentPalette = CreatePalette();             
-                UpdatePaletteMenu();
+                DrawPaletteElement();
             };
 
-            addPaletteButton.clickable.clicked += () =>
+            loadBlockInfoPaletteButton.clickable.clicked += () =>
             {
                 if (currentPalette == null)
                     return;
@@ -48,6 +48,7 @@ namespace Editor.Dungeon
                     return;
 
                 currentPalette.Add(loadedBlockInfo);
+                EditorUtility.SetDirty(currentPalette);
             };
 
             loadPaletteButton.clickable.clicked += () =>
@@ -55,7 +56,7 @@ namespace Editor.Dungeon
                 var loadPath = EditorUtility.OpenFilePanel("Palette 불러오기", Application.dataPath, PALETTE_FILE_EXTENTION);
 
                 currentPalette = LoadPalette(loadPath);
-                UpdatePaletteMenu();
+                DrawPaletteElement();
             };
         }
 
@@ -115,10 +116,10 @@ namespace Editor.Dungeon
             if (palette == null)
                 return;
 
-            palette.updateElementEvent += UpdatePaletteMenu;
+            palette.updateElementEvent += DrawPaletteElement;
         }
 
-        void UpdatePaletteMenu()
+        void DrawPaletteElement()
         {
             if (currentPalette == null)
                 return;
@@ -126,12 +127,19 @@ namespace Editor.Dungeon
             paletteElementPanel.Clear();
             foreach (var blockInfo in currentPalette)
             {
+                if (blockInfo == null)
+                    continue;
+
                 var elementTemplate = paletteElementTree.CloneTree();
                 elementTemplate.styleSheets.Add(paletteElementStyleSheet);
 
                 var elementButton = elementTemplate.Query<Button>("element-button").First();
                 elementButton.style.backgroundImage = new StyleBackground(blockInfo.PreviewTexture);
-                elementButton.clickable.clicked += () => { selectedPaletteEelment.SetValue(blockInfo); };
+                elementButton.clickable.clicked += () => 
+                {
+                    selectedPaletteEelment.SetValue(blockInfo);
+                    currentTileEvent = SetTile;
+                };
 
                 var removeButton = elementTemplate.Query<Button>("remove-button").First();
                 removeButton.clickable.clicked += () => RemovePaletteElement(blockInfo);
@@ -148,7 +156,7 @@ namespace Editor.Dungeon
             currentPalette.Remove(blockInfo);
 
             if (!currentPalette.Contains(selectedPaletteEelment.Value))
-                selectedPaletteEelment.SetEmpty();
+                selectedPaletteEelment.Clear();
         }
 
     }

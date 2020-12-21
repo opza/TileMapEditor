@@ -60,7 +60,7 @@ namespace Editor.Dungeon
             root.Add(mainUxml.CloneTree());
 
             var mainStyleSheet = Loader.LoadUss(MAIN_USS_PATH);
-            root.styleSheets.Add(mainStyleSheet);      
+            //root.styleSheets.Add(mainStyleSheet);      
         }
 
         class SelectedItem<T> where T : class
@@ -70,7 +70,7 @@ namespace Editor.Dungeon
 
 
             public bool IsEmpty => Value == null;
-            public void SetEmpty() => Value = null;
+            public void Clear() => Value = null;
 
             public void SetValue(T value) => Value = value;
             
