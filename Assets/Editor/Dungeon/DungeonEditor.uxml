@@ -5,7 +5,7 @@
     xmlns:editor="UnityEditor.UIElements"
     xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
 >
-  <Style src="Assets/Editor/Dungeon/DungeonEditor.uss"/>
+  <engine:Style src="DungeonEditor.uss"/>
   <engine:VisualElement name="root-panel">
     <engine:Box name="main-panel">
       <editor:Vector2IntField name="size-field"/>

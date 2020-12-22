@@ -5,6 +5,7 @@
     xmlns:editor="UnityEditor.UIElements"
     xsi:noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
 >
+  <engine:Style src="PaletteElementTemplate.uss"/>
   <engine:VisualElement name="element-container">
     <engine:VisualElement name="main-container">
       <engine:Button name="element-button"/>

@@ -38,9 +38,6 @@ MonoBehaviour:
   - sprite: {fileID: -3462126092104230500, guid: 340d5d260a8edc443af6c5ff565eb29f,
       type: 3}
     mask: 0000000101000100
-  - sprite: {fileID: 3818911086006376876, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0000000100000100
   - sprite: {fileID: 8568142618917566389, guid: 340d5d260a8edc443af6c5ff565eb29f,
       type: 3}
     mask: 0001000001000000
@@ -53,6 +50,12 @@ MonoBehaviour:
   - sprite: {fileID: -9220975972155412195, guid: 340d5d260a8edc443af6c5ff565eb29f,
       type: 3}
     mask: 0001000100000000
+  - sprite: {fileID: 3818911086006376876, guid: 340d5d260a8edc443af6c5ff565eb29f,
+      type: 3}
+    mask: 0000000100000100
   - sprite: {fileID: 3253857429519456842, guid: 340d5d260a8edc443af6c5ff565eb29f,
       type: 3}
     mask: 0001000101000100
+  - sprite: {fileID: 3253857429519456842, guid: 340d5d260a8edc443af6c5ff565eb29f,
+      type: 3}
+    mask: 0001000000000100

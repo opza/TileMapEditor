@@ -131,7 +131,6 @@ namespace Editor.Dungeon
                     continue;
 
                 var elementTemplate = paletteElementTree.CloneTree();
-                elementTemplate.styleSheets.Add(paletteElementStyleSheet);
 
                 var elementButton = elementTemplate.Query<Button>("element-button").First();
                 elementButton.style.backgroundImage = new StyleBackground(blockInfo.PreviewTexture);

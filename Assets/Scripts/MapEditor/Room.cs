@@ -9,6 +9,8 @@ using UnityEditor;
 
 using Editor.Dungeon;
 
+using Util.SerializableObjects;
+
 [Serializable]
 public class Room : ScriptableObject, ISerializationCallbackReceiver
 {
@@ -25,7 +27,7 @@ public class Room : ScriptableObject, ISerializationCallbackReceiver
     public DoorHeaderGroup HeaderGroup => doorHeaderGroup;
 
     [SerializeField]
-    Serializable2dArray serializable2dTiles;
+    Serializable2dArray<Tile> serializable2dTiles;
 
 
     public Tile this[int x, int y]=>GetTile(x,y);
@@ -133,7 +135,7 @@ public class Room : ScriptableObject, ISerializationCallbackReceiver
 
     void ISerializationCallbackReceiver.OnBeforeSerialize()
     {
-        serializable2dTiles = new Serializable2dArray(tiles);
+        serializable2dTiles = new Serializable2dArray<Tile>(tiles);
     }
 
     void ISerializationCallbackReceiver.OnAfterDeserialize()
@@ -544,95 +546,15 @@ public class Room : ScriptableObject, ISerializationCallbackReceiver
     }
 
     [Serializable]
-    class Serializable2dArray
+    class TestSerializable2dArray<T>
     {
         [SerializeField]
-        [HideInInspector]
-        Tile[] serializableArray;
+        T[] serializableArray;
 
-        [SerializeField]
-        [ReadOnly]
-        int xSize;
-        public int XSize => xSize;
 
-        [SerializeField]
-        [ReadOnly]
-        int ySize;
-        public int YSize => ySize;
-
-        public int Length => xSize * ySize;
-
-        public Tile this[int x, int y]
-        {
-            get => GetTile(x, y);
-            set => SetTile(value, x, y);
-        }
-
-        public Serializable2dArray(Tile[,] original2dArray)
-            : this(original2dArray?.GetLength(0) ?? 0, original2dArray?.GetLength(1) ?? 0)
-        {
-            for (int x = 0; x < xSize; x++)
-            {
-                for (int y = 0; y < ySize; y++)
-                {
-                    SetTile(original2dArray[x, y], x, y);
-                }
-            }
-        }
-
-        public Serializable2dArray(int xSize, int ySize)
-        {
-            this.xSize = xSize;
-            this.ySize = ySize;
-
-            serializableArray = new Tile[xSize * ySize];
-        }
-
-        public void SetTile(Tile value, int x, int y)
-        {
-            if (!Inside(x, y))
-                throw new IndexOutOfRangeException();
-
-            var idx = GetOffsetIndex(x, y);
-            serializableArray[idx] = value;
-        }
-
-        public Tile GetTile(int x, int y)
-        {
-            if (!Inside(x, y))
-                throw new IndexOutOfRangeException();
-
-            var idx = GetOffsetIndex(x, y);
-            return serializableArray[idx];
-        }
-
-        public Tile[,] To2dArray()
-        {
-            var original2dArray = new Tile[xSize, ySize];
-            for (int x = 0; x < xSize; x++)
-            {
-                for (int y = 0; y < ySize; y++)
-                {
-                    original2dArray[x, y] = GetTile(x, y);
-                }
-            }
-
-            return original2dArray;
-        }
-
-        int GetOffsetIndex(int x, int y)
-        {
-            return xSize * x + y;
-        }
-
-        bool Inside(int x, int y)
-        {
-            if (x < 0 || x >= xSize || y < 0 || y >= ySize)
-                return false;
-
-            return true;
-        }
     }
+
+    
 
 
 }

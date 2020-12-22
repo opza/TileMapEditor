@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 
+// TODO : UI Toolkit 및 자동으로 타일을 Split하게 바꿔야함
+
 namespace Worlds
 {
     [CustomPropertyDrawer(typeof(TileSet.TileSetElement))]

@@ -28,7 +28,14 @@ namespace Worlds
 
             var mapSet = mapSets[mapSetName];
 
+            // TEST : 시작 부분
+            var startX = 50;
+            var staryY = 50;
+
             var targetRoom = mapSet[1];
+            return;
+            //Build(targetRoom, startX, staryY);
+
             var headerGroup = targetRoom.HeaderGroup;
             for (int i = 0; i < headerGroup.DoorRightHeaders.Count; i++)
             {
@@ -36,7 +43,10 @@ namespace Worlds
                 var room = roomAndDoorRect.Item1;
                 var doorRect = roomAndDoorRect.Item2;
 
+                if (room == null)
+                    continue;
 
+                
             }
             
         }

@@ -23,6 +23,7 @@ namespace Worlds
         // Update is called once per frame
         void Update()
         {
+            // TEST : 블럭 생성
             if (Input.GetMouseButtonDown(0))
             {
                 var mouseWorldPoint = MousePoint.GetWorldPoint();

@@ -1,0 +1,30 @@
+{
+    "UxmlGuid": "d6389d03835ef67469475f4c94da87df",
+    "UxmlPath": "Assets/Editor/Dungeon/BuildTileTemplate/BuildTileTemplate.uxml",
+    "CanvasX": 0,
+    "CanvasY": 0,
+    "CanvasWidth": 200,
+    "CanvasHeight": 200,
+    "MatchGameView": false,
+    "ZoomScale": 1.75,
+    "PanOffset": {
+        "x": 233.63290405273438,
+        "y": 218.26657104492188
+    },
+    "ColorModeBackgroundOpacity": 1.0,
+    "ImageModeCanvasBackgroundOpacity": 1.0,
+    "CameraModeCanvasBackgroundOpacity": 1.0,
+    "EnableCanvasBackground": false,
+    "CanvasBackgroundMode": 0,
+    "CanvasBackgroundColor": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 255.0
+    },
+    "CanvasBackgroundImage": {
+        "instanceID": 0
+    },
+    "CanvasBackgroundImageScaleMode": 1,
+    "CanvasBackgroundCameraName": ""
+}

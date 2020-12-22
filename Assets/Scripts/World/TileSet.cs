@@ -6,9 +6,6 @@ using System.Linq;
 using System;
 
 using Util;
-using UnityEngine.Tilemaps;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace Worlds
 {
@@ -27,7 +24,7 @@ namespace Worlds
         List<TileSetElement> tileSetElements = new List<TileSetElement>();
 
         public Sprite this[byte mask] => GetTileElement(mask);
-        public Sprite Default => GetTileElement(0);
+        public Sprite Default => tileSetElements[0]?.Sprite;
 
         public Sprite GetTileElement(byte mask)
         {
@@ -38,7 +35,9 @@ namespace Worlds
                     return tileSetElement.Sprite;
             }
 
-            throw new ArgumentException($"{Convert.ToString(mask, 2).PadLeft(8,'0')}에 해당하는 요소가 없습니다");
+            Debug.LogError($"{Convert.ToString(mask, 2).PadLeft(8, '0')}에 해당하는 요소가 없습니다");
+            return Default;
+            
         }
 
         [Serializable]
@@ -68,11 +67,6 @@ namespace Worlds
                 if (mask == null || mask.Length <= 0)
                     mask = new bool[8];
             }
-        }
-
-        public class Tilett : UnityEngine.Tilemaps.Tile
-        {
-
         }
 
     }

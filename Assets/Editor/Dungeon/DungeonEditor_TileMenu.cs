@@ -131,7 +131,7 @@ namespace Editor.Dungeon
             if (currentRoom == null)
                 return;
 
-            var gridElements = gridTilePanel.CreateGridButton(currentRoom.Width, currentRoom.Height, buildTileTree, buildTileStyleSheet, OnClickTileButton);
+            var gridElements = gridTilePanel.CreateGridButton(currentRoom.Width, currentRoom.Height, buildTileTree, OnClickTileButton);
             DrawGridButton(gridElements);
 
             if (GUI.changed)
@@ -153,7 +153,7 @@ namespace Editor.Dungeon
             {
                 for (int y = 0; y < currentRoom.Height; y++)
                 {
-                    var button = elements[x, y] as Button;
+                    var button = elements[x, y].Query<Button>().First();
                     button.style.backgroundImage = currentRoom[x, y].BlockInfo?.PreviewTexture;
 
                     if(currentRoom[x,y]?.IsDoor == true)

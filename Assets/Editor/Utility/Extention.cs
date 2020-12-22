@@ -15,38 +15,26 @@ namespace Editor.Utility
     public static class Extention
     {
 
-        public static VisualElement[,] CreateGridButton(this VisualElement parent, int width, int height, Action onClicked = null)
-        {
-            return parent.CreateGrid(width, height, (x, y) =>
-            {
-                var button = new Button();
-                button.clickable.clicked += () => onClicked();
-
-                return button;
-            });
-        }
-
-        public static VisualElement[,] CreateGridButton(this VisualElement parent, int width, int heigth, VisualTreeAsset buttonTemplate, StyleSheet styleSheet = null, Action<int, int> onClicked = null)
+        public static VisualElement[,] CreateGridButton(this VisualElement parent, int width, int heigth, VisualTreeAsset buttonTemplate, Action<int, int> onClicked = null)
         {
             return parent.CreateGrid(width, heigth, (x, y) =>
             {
+                //var template = buttonTemplate.CloneTree();
+                var t = new VisualElement();
                 var template = buttonTemplate.CloneTree();
                 var button = template.Query<Button>().First();
                 button.clickable.clicked += () => onClicked?.Invoke(x, y);
 
-                return button;
-            }, styleSheet);
+                return template;
+            });
         }
 
-        public static VisualElement[,] CreateGrid(this VisualElement parent, int width, int height, Func<int, int, VisualElement> elementCreator, StyleSheet styleSheet = null)
+        public static VisualElement[,] CreateGrid(this VisualElement parent, int width, int height, Func<int, int, VisualElement> elementCreator)
         {
             var gridElements = new VisualElement[width, height];
 
             if (width <= 0 || height <= 0)
                 return gridElements;
-
-            if (styleSheet != null)
-                parent.styleSheets.Add(styleSheet);
 
             var rowFlex = new StyleEnum<FlexDirection>();
             rowFlex.value = FlexDirection.Row;

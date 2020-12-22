@@ -14,19 +14,11 @@ namespace Editor.Dungeon
     public partial class DungeonEditor : EditorWindow
     {
         readonly string MAIN_UXML_PATH = "Assets/Editor/Dungeon/DungeonEditor.uxml";
-        readonly string MAIN_USS_PATH = "Assets/Editor/Dungeon/DungeonEditor.uss";
-
         readonly string PALETTE_ELEMENT_UXML_PATH = "Assets/Editor/Dungeon/PaletteElementTemplate/PaletteElementTemplate.uxml";
-        readonly string PALETTE_ELEMENT_USS_PATH = "Assets/Editor/Dungeon/PaletteElementTemplate/PaletteElementTemplate.uss";
-
         readonly string BUILD_TILE_UXML_PATH = "Assets/Editor/Dungeon/BuildTileTemplate/BuildTileTemplate.uxml";
-        readonly string BUILD_TILE_USS_PATH = "Assets/Editor/Dungeon/BuildTileTemplate/BuildTileTemplate.uss";
 
         VisualTreeAsset paletteElementTree;
-        StyleSheet paletteElementStyleSheet;
-
-        VisualTreeAsset buildTileTree;
-        StyleSheet buildTileStyleSheet;
+        VisualTreeAsset buildTileTree;   
    
         SelectedItem<BlockInfo> selectedPaletteEelment;
 
@@ -43,10 +35,7 @@ namespace Editor.Dungeon
             SetMainTree(root);
 
             paletteElementTree = Loader.LoadUxml(PALETTE_ELEMENT_UXML_PATH);
-            paletteElementStyleSheet = Loader.LoadUss(PALETTE_ELEMENT_USS_PATH);
-
             buildTileTree = Loader.LoadUxml(BUILD_TILE_UXML_PATH);
-            buildTileStyleSheet = Loader.LoadUss(BUILD_TILE_USS_PATH);
 
             selectedPaletteEelment = new SelectedItem<BlockInfo>();           
 
@@ -57,10 +46,7 @@ namespace Editor.Dungeon
         void SetMainTree(VisualElement root)
         {
             var mainUxml = Loader.LoadUxml(MAIN_UXML_PATH);
-            root.Add(mainUxml.CloneTree());
-
-            var mainStyleSheet = Loader.LoadUss(MAIN_USS_PATH);
-            //root.styleSheets.Add(mainStyleSheet);      
+            root.Add(mainUxml.CloneTree());   
         }
 
         class SelectedItem<T> where T : class
