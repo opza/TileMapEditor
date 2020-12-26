@@ -333,6 +333,14 @@ public class Room : ScriptableObject, ISerializationCallbackReceiver
 
         public DoorHeaders this[DoorDirection direction] => GetDoorHeadersForDirection(direction);
 
+        public DoorHeaders[] AllDoorHeaders => new DoorHeaders[]
+        {
+            doorTopHeaders,
+            doorBottomHeaders,
+            doorLeftHeaders,
+            doorRightHeaders
+        };
+
         public static DoorHeaderGroup GetDoorHeaders(Room room)
         {
             var doorHeaderGroup = new DoorHeaderGroup(room);       
@@ -543,15 +551,6 @@ public class Room : ScriptableObject, ISerializationCallbackReceiver
             this.y = y;
             this.isDoor = isDoor;
         }
-    }
-
-    [Serializable]
-    class TestSerializable2dArray<T>
-    {
-        [SerializeField]
-        T[] serializableArray;
-
-
     }
 
     

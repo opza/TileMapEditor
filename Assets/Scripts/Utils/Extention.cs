@@ -38,9 +38,13 @@ namespace Util
             return b;
         }
 
-        public static T[] RandomSwap<T>(this T[] array)
+        public static IList<T> RandomSwap<T>(this IList<T> list)
         {
-            
+            return list.ToArray().RandomSwap().ToList();
+        }
+
+        public static T[] RandomSwap<T>(this T[] array)
+        {         
 
             var swapArray = array.Clone() as T[];
 
@@ -52,18 +56,39 @@ namespace Util
             for (int i = array.Length - 1; i > 0 ; i--)
             {
                 var ranValue = random.Next(i);
-                Swap(swapArray, ranValue, i);
+                swapArray.Swap(ranValue, i);
             }
 
             return swapArray;
 
         }
 
-        public static void Swap<T>(T[] swapArray, int idxA, int idxB)
+        public static void Swap<T>(this T[] swapArray, int idxA, int idxB)
         {
             var temp = swapArray[idxA];
             swapArray[idxB] = swapArray[idxA];
             swapArray[idxB] = temp;
+        }
+
+        public static T GetRandomItem<T>(this IEnumerable<T> enumerable)
+        {
+            if (enumerable.Count() <= 0)
+                return default(T);
+
+            var random = new Random(Environment.TickCount);
+
+            var ranIdx = random.Next(0, enumerable.Count());
+            var currIdx = 0;
+
+            var enumeraotr = enumerable.GetEnumerator();
+
+            do
+            {
+                enumeraotr.MoveNext();              
+
+            } while (ranIdx != currIdx++);
+
+            return enumeraotr.Current;
         }
     }
 }

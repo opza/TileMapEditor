@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{B7A283E0-72DA-00A4-8124-02D82A193EF6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -59,9 +60,9 @@
     <Compile Include="Assets\Scripts\MapEditor\Room.cs" />
     <Compile Include="Assets\Scripts\World\Event\ChangeBlockSpriteArgs.cs" />
     <Compile Include="Assets\Scripts\MapEditor\MapSet.cs" />
-    <Compile Include="Assets\Scripts\World\BlockManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\BlockManager.cs" />
     <Compile Include="Assets\Scripts\World\World.cs" />
-    <Compile Include="Assets\Scripts\World\WorldManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\WorldManager.cs" />
     <Compile Include="Assets\Scripts\World\TileSet.cs" />
     <Compile Include="Assets\Scripts\MapEditor\BlockInfo.cs" />
     <Compile Include="Assets\Scripts\MapEditor\Palette.cs" />

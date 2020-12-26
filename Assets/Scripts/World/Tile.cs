@@ -25,6 +25,8 @@ namespace Worlds
 
         Block block;
 
+        public bool HasBlock => block != null;
+
         public Tile(int x, int y)
         {
             this.x = x;
@@ -49,6 +51,9 @@ namespace Worlds
 
         public void OnCreatedBlock(BlockInfo blockInfo)
         {
+            if (blockInfo == null)
+                return;
+
             if (block != null)
                 return;
 

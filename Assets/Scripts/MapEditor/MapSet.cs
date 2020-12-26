@@ -14,17 +14,11 @@ public class MapSet : ScriptableObject
     Room[] rooms;
     public Room[] Room => rooms;
 
+    public Room GetRandomRoom() => rooms.GetRandomItem();
+
     public Room this[int idx] => rooms[idx];
 
     public int Count => rooms?.Count() ?? 0;
-
-    public Room GetRandomRoom()
-    {
-        UnityEngine.Random.InitState(Environment.TickCount);
-        var ranIdx = UnityEngine.Random.Range(0, Count);
-      
-        return rooms[ranIdx];
-    }
 
     public (Room, Rect) GetRandomRoomWithMatchedDoor(Room room, Room.DoorHeaderGroup.DoorDirection direction, int idx)
     {

@@ -12,43 +12,84 @@ namespace Worlds
     public class MapGenerator
     {
         World world;
-        Dictionary<string, MapSet> mapSets;
 
-        public MapGenerator(World world, string mapSetsPath)
+        // TODO : 맵 MIN 및 MAX Size를 가져와야함
+        readonly int MIN_SIZE = 10;
+        readonly int MAX_SIZE = 10;
+
+        List<LevelMapSet> levelMapSets = new List<LevelMapSet>();
+
+        public MapGenerator(World world, List<MapSet> level0Maps, List<MapSet> level1Maps, List<MapSet> level2Maps)
         {
             this.world = world;
-            mapSets = ResourceLoader.LoadResources<MapSet>(mapSetsPath);
+
+            levelMapSets = new List<LevelMapSet>(){
+                new LevelMapSet(0, level0Maps),
+                new LevelMapSet(1, level1Maps),
+                new LevelMapSet(2, level2Maps)
+            };
         }
 
-        // TODO : 현재는 방에서 1개의 Door만 골라서 방을 추가하는 형식, 이후 바꿔야함
-        public void Generate(string mapSetName)
+        // TODO : 레벨별 맵 생성 함수를 만들어야함
+        public void Generate(int level)
         {
-            if (!mapSets.ContainsKey(mapSetName))
+            if (levelMapSets.Count < level)
                 return;
 
-            var mapSet = mapSets[mapSetName];
+            var currMap = levelMapSets[level].MapSet.GetRandomItem();
+            if (currMap == null)
+                return;
+            
+            //if(levelMapSets)
+            //{
+            //    var randomRoom = currMap.GetRandomRoom();
+            //    var startX = world.Width / 2;
+            //    var startY = world.Height / 2;
 
-            // TEST : 시작 부분
-            var startX = 50;
-            var staryY = 50;
+            //    Build(randomRoom, startX, startY);
 
-            var targetRoom = mapSet[1];
-            return;
-            //Build(targetRoom, startX, staryY);
+            //    foreach (var doorHeader in randomRoom.HeaderGroup.AllDoorHeaders)
+            //    {
+            //        foreach (var doorRect in doorHeader)
+            //        {
+            //            var absoultePosDoorRect = ConvertAbsolutePosition(doorRect, startX, startY);
+            //            level1DoorCondidates.Enqueue(absoultePosDoorRect);
+            //        }
+            //    }
+            //}
 
-            var headerGroup = targetRoom.HeaderGroup;
-            for (int i = 0; i < headerGroup.DoorRightHeaders.Count; i++)
+            // TODO : Door 후보가 없을 때 방을 생성하도록 정의해야함
+            if(levelMapSets[level].DoorCondidates.Count <= 0)
             {
-                var roomAndDoorRect = mapSet.GetRandomRoomWithMatchedDoor(targetRoom, Room.DoorHeaderGroup.DoorDirection.Right, i);
-                var room = roomAndDoorRect.Item1;
-                var doorRect = roomAndDoorRect.Item2;
+                if(level == 0)
+                {
+                    var randomRoom = currMap.GetRandomRoom();
+                    var startX = world.Width / 2;
+                    var startY = world.Height / 2;
 
-                if (room == null)
-                    continue;
+                    Build(randomRoom, startX, startY);
 
+                    foreach (var doorHeader in randomRoom.HeaderGroup.AllDoorHeaders)
+                    {
+                        foreach (var doorRect in doorHeader)
+                        {
+                            var absoultePosDoorRect = ConvertAbsolutePosition(doorRect, startX, startY);
+                            levelMapSets[level].DoorCondidates.Enqueue(absoultePosDoorRect);
+                        }
+                    }
+                }
+                else if(levelMapSets[level].DoorCondidates.Count <= 0)
+            }
+
+            var mapSize = UnityEngine.Random.Range(MIN_SIZE, MAX_SIZE);
+            var currSize = 0;
+
+            // TODO : 맵 전체의 Door후보와 현재 만드는 던전맵의 Door후보를 따로 나눠서 계산해야할 듯
+            while(mapSize > currSize++)
+            {
                 
             }
-            
+
         }
 
        
@@ -58,7 +99,7 @@ namespace Worlds
             {
                 for (int y = 0; y < room.Height; y++)
                 {
-                    var worldTile = world.GetTile(pivotX + x, pivotY + y);
+                    var worldTile = world.GetTile(pivotX + x, pivotY - y);
                     var roomTile = room.GetTile(x, y);
 
                     worldTile.OnCreatedBlock(roomTile.BlockInfo);
@@ -66,7 +107,44 @@ namespace Worlds
             }
         }
 
-        
+        bool CanBuild(int startX, int startY, int width, int height)
+        {
+            for (int x = startX; x < startX + width; x++)
+            {
+                for (int y = startY; y > startY - height; y--)
+                {
+                    if (world.GetTile(x, y)?.HasBlock != false)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        Rect ConvertAbsolutePosition(Rect relativePosition, int worldX, int worldY)
+        {
+            var absolutePos = new Rect(relativePosition);
+            absolutePos.x = worldX;
+            absolutePos.y = worldY;
+
+            return absolutePos;
+        }
+
+        class LevelMapSet
+        {
+            int level;
+
+            List<MapSet> mapSet;
+            public List<MapSet> MapSet => mapSet;
+
+            Queue<Rect> doorCondidates = new Queue<Rect>();
+            public Queue<Rect> DoorCondidates => doorCondidates;
+
+            public LevelMapSet(int level, List<MapSet> mapSet)
+            {
+                this.mapSet = mapSet;
+            }
+        }
 
 
     }
