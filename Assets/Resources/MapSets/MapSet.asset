@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MapSet
   m_EditorClassIdentifier: 
   rooms:
-  - {fileID: 11400000, guid: 45d4dce92146eaf45aa056bcba12e97c, type: 2}
   - {fileID: 11400000, guid: c762214535fba0a46815ad3e6cae80b4, type: 2}
+  - {fileID: 11400000, guid: 45d4dce92146eaf45aa056bcba12e97c, type: 2}

@@ -9,6 +9,8 @@ using System.Data;
 
 using Editor.Utility;
 
+using Worlds.Generate;
+
 namespace Editor.Dungeon
 {
     public partial class DungeonEditor

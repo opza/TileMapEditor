@@ -4,6 +4,8 @@ using UnityEditor;
 using Editor.Utility;
 using TMPro;
 
+using Worlds.Generate;
+
 [CustomEditor(typeof(Room))]
 public class RoomInspector : UnityEditor.Editor
 {
