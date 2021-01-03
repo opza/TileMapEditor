@@ -22,7 +22,8 @@ namespace Worlds.Generate
         Tile[,] tiles;
 
         [SerializeField]
-        DoorGroup doorGroup;
+        DoorsGroup doorGroup;
+        public DoorsGroup DoorGroup => doorGroup;
 
         [SerializeField]
         BorderDoorsGroup borderDoorGroup;
@@ -99,12 +100,9 @@ namespace Worlds.Generate
 
         void UpdateDoorTile()
         {
-            doorGroup = DoorGroup.CreateGroup(this);
+            doorGroup = DoorsGroup.CreateGroup(this);
             borderDoorGroup = BorderDoorsGroup.BuildBorderDoorsGroup(this);
         }
-
-
-
 
         void PasteToAnotherTiles(Tile[,] targetTiles, Tile[,] copiedTiles)
         {
@@ -144,28 +142,44 @@ namespace Worlds.Generate
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            tiles = serializable2dTiles?.To2dArray() as Tile[,];
+            tiles = serializable2dTiles?.To2dArray();
+            UpdateDoorTile();
         }
 
         [Serializable]
-        public class DoorGroup
+        public class DoorsGroup
         {
             Room room;
 
             [SerializeField]
             List<DoorTiles> doorGroup = new List<DoorTiles>();
 
-            public static DoorGroup CreateGroup(Room room)
+            public static DoorsGroup CreateGroup(Room room)
             {
-                var doorGroup = new DoorGroup(room);
+                var doorGroup = new DoorsGroup(room);
                 doorGroup.BuildGroup(room.tiles);
 
                 return doorGroup;
             }
 
-            DoorGroup(Room room)
+            DoorsGroup(Room room)
             {
                 this.room = room;
+            }
+
+            public Tile[] GetDoorTiles(int x, int y)
+            {
+                var tile = room.GetTile(x, y);
+                if (tile?.IsDoor != true)
+                    return null;
+
+                foreach (var doorTiles in doorGroup)
+                {
+                    if (doorTiles.Contains(tile))
+                        return doorTiles.DoorTilesArray;
+                }
+
+                return null;
             }
 
             public bool Contains(Tile tile)
@@ -268,6 +282,8 @@ namespace Worlds.Generate
             {
                 [SerializeField]
                 List<Tile> doorTiles = new List<Tile>();
+
+                public Tile[] DoorTilesArray => doorTiles.ToArray();
 
                 public DoorTiles()
                 {

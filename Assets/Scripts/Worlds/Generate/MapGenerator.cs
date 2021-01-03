@@ -37,7 +37,7 @@ namespace Worlds.Generate
                 return;
 
             // TODO : Door 후보가 없을 때 방을 생성하도록 정의해야함
-            if (levelMapSets[level].DoorCondidates.Count <= 0)
+            if (levelMapSets[level].BuildedCondidates.Count <= 0)
             {
                 if (level == 0)
                 {
@@ -53,8 +53,10 @@ namespace Worlds.Generate
                     {
                         foreach (var doorRect in borderDoors)
                         {
-                            var absoluteDoorRect = new AbsoluteDoorRect(doorRect, startX, startY, borderDoors.Direction);
-                            levelMapSets[level].DoorCondidates.Enqueue(absoluteDoorRect);
+                            var absoluteDoorRect = ConvertToAbsoluteDoorRect(doorRect, startX, startY);
+                            var buildCondidate = new BuildCondidate(randomRoom, doorRect, absoluteDoorRect, borderDoors.Direction);
+
+                            levelMapSets[level].BuildedCondidates.Enqueue(buildCondidate);
                         }
                     }
                 }
@@ -66,19 +68,25 @@ namespace Worlds.Generate
             var mapSize = CalculateBuildedMapSize(currMap.Count);
             var currSize = 0;
 
-            var doorCondidates = levelMapSets[level].DoorCondidates;
+            var doorCondidates = levelMapSets[level].BuildedCondidates;
 
 
             // TODO : 맵 전체의 Door후보와 현재 만드는 던전맵의 Door후보를 따로 나눠서 계산해야할 듯
             while (mapSize > currSize++ && doorCondidates.Count > 0)
             {
-                var selectedDoor = doorCondidates.Dequeue();
-                var selectedRoomAndAbsoluteRoomRect = currMap.GetRoomWithMatchedDoor(selectedDoor);
+                var selectedCondidate = doorCondidates.Dequeue();
+                var selectedRoomInfo = currMap.GetRoomWithMatchedDoor(selectedCondidate.AbsoluteDoorRect, selectedCondidate.Direction);
 
-                var slelectedRoom = selectedRoomAndAbsoluteRoomRect.Item1;
-                var absoluteRoomRect = selectedRoomAndAbsoluteRoomRect.Item2.AbsoluteRect;
+                var selectedRoom = selectedRoomInfo.selectedRoom;
+                var relatvieDoorRect = selectedRoomInfo.relativeBorderDoorRect;
+                var absoluteRoomRect = selectedRoomInfo.absoulteRoomRect;
 
-                Build(slelectedRoom, (int)absoluteRoomRect.x, (int)absoluteRoomRect.y);
+                Build(selectedRoom, (int)absoluteRoomRect.x, (int)absoluteRoomRect.y);
+
+                // TODO : DoorGorup을 제거해야함
+                var doorTiles = selectedRoom.DoorGroup.GetDoorTiles((int)relatvieDoorRect.x, (int)relatvieDoorRect.y);
+
+                Remove(doorTiles, (int)absoluteRoomRect.x, (int)absoluteRoomRect.y);
             }
 
         }
@@ -109,8 +117,23 @@ namespace Worlds.Generate
                     if (roomTile == null)
                         continue;
 
-                    worldTile.OnCreatedBlock(roomTile.BlockInfo);
+                    
+
+                    worldTile.BuildBlock(roomTile.BlockInfo);
                 }
+            }
+        }
+
+        // TODO : 제거시를 만들어야함
+        void Remove(Room.Tile[] doorTiles, int pivotX, int pivotY)
+        {
+            foreach (var doorTile in doorTiles)
+            {
+                var absoluteX = pivotX + doorTile.X;
+                var absoluteY = pivotY - doorTile.Y;
+
+                var worldTile = world.GetTile(absoluteX, absoluteY);
+                worldTile?.DestroyBlock();
             }
         }
 
@@ -128,7 +151,14 @@ namespace Worlds.Generate
             return true;
         }
 
-        
+        Rect ConvertToAbsoluteDoorRect(Rect relativePosition, int worldRoomX, int worldRoomY)
+        {
+            var absolutePos = new Rect(relativePosition);
+            absolutePos.x = worldRoomX + absolutePos.x;
+            absolutePos.y = worldRoomY - absolutePos.y;
+
+            return absolutePos;
+        }
 
         public class LevelMapSet
         {
@@ -137,8 +167,8 @@ namespace Worlds.Generate
             List<MapSet> mapSet;
             public List<MapSet> MapSet => mapSet;
 
-            Queue<AbsoluteDoorRect> doorCondidates = new Queue<AbsoluteDoorRect>();
-            public Queue<AbsoluteDoorRect> DoorCondidates => doorCondidates;
+            Queue<BuildCondidate> buildedCondidates = new Queue<BuildCondidate>();
+            public Queue<BuildCondidate> BuildedCondidates => buildedCondidates;
 
             public LevelMapSet(int level, List<MapSet> mapSet, int levelDepth)
             {
@@ -146,7 +176,23 @@ namespace Worlds.Generate
             }
         }
 
-        
+        public class BuildCondidate
+        {
+            public Room Room { get; }
+
+            public Rect RelativeDoorRect { get; }
+            public Rect AbsoluteDoorRect { get; }
+
+            public Room.BorderDoorsGroup.DoorDirection Direction { get; }
+
+            public BuildCondidate(Room room, Rect relativeDoorRect, Rect absoluteDoorRect, Room.BorderDoorsGroup.DoorDirection direction)
+            {
+                Room = room;
+                RelativeDoorRect = relativeDoorRect;
+                AbsoluteDoorRect = absoluteDoorRect;
+                Direction = direction;
+            }
+        }
 
 
     }

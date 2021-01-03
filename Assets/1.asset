@@ -15,19 +15,6 @@ MonoBehaviour:
   doorGroup:
     doorGroup:
     - doorTiles:
-      - x: 0
-        y: 1
-        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-        isDoor: 1
-      - x: 0
-        y: 2
-        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-        isDoor: 1
-      - x: 0
-        y: 3
-        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-        isDoor: 1
-    - doorTiles:
       - x: 4
         y: 2
         blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
@@ -36,22 +23,17 @@ MonoBehaviour:
         y: 3
         blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
         isDoor: 1
-  doorHeaderGroup:
-    doorTopHeaders:
+  borderDoorGroup:
+    topBorderDoors:
       doorRects: []
       direction: 0
-    doorBottomHeaders:
+    BottomBorderDoors:
       doorRects: []
       direction: 1
-    doorLeftHeaders:
-      doorRects:
-      - serializedVersion: 2
-        x: 0
-        y: 1
-        width: 1
-        height: 3
+    leftBorderDoors:
+      doorRects: []
       direction: 2
-    doorRightHeaders:
+    rightBorderDoors:
       doorRects:
       - serializedVersion: 2
         x: 4
@@ -68,15 +50,15 @@ MonoBehaviour:
     - x: 0
       y: 1
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 1
+      isDoor: 0
     - x: 0
       y: 2
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 1
+      isDoor: 0
     - x: 0
       y: 3
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 1
+      isDoor: 0
     - x: 0
       y: 4
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}

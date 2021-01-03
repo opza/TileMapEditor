@@ -11,6 +11,7 @@ namespace Worlds
     {
         public static event EventHandler<ChangeBlockSpriteArgs> changedBlockSpriteEvent;
         public static event EventHandler<CreateBlcokObjectArgs> createdBlockEvent;
+        public static event EventHandler<DestrotyBlockOjectArgs> destroyedBlockEvent;
 
         int x;
         public int X => x;
@@ -49,32 +50,78 @@ namespace Worlds
             };
         }
 
-        public void OnCreatedBlock(BlockInfo blockInfo)
+        public void BuildBlock(BlockInfo blockInfo)
         {
             if (blockInfo == null)
                 return;
 
-            if (block != null)
+            if (HasBlock)
                 return;
 
             block = Block.Create(blockInfo);
 
-            var craeteBlockArgs = new CreateBlcokObjectArgs(x, y, block);
-            var changeBlockSpriteArgs = new ChangeBlockSpriteArgs(Vector3Int, block.BlockInfo.TileSet.Default);
+            var createBlockArgs = new CreateBlcokObjectArgs(x, y, block);           
+            createdBlockEvent?.Invoke(this, createBlockArgs);
 
-            createdBlockEvent?.Invoke(this, craeteBlockArgs);
-            changedBlockSpriteEvent?.Invoke(this, changeBlockSpriteArgs);
-            OnChangedBlockSprite(block);
+            ChangeCreateBlockSprite();
+            ChangeCreateNeighborBlockSprite();
         }
 
-        void OnChangedBlockSprite(Block block)
+        public void DestroyBlock()
         {
-            byte mask = 0x00;
-            byte dirNeighborMask = 0x01;
+            if (!HasBlock)
+                return;
+
+            block = null;
+
+            var destroyBlockArgs = new DestrotyBlockOjectArgs(x, y);           
+            destroyedBlockEvent?.Invoke(this, destroyBlockArgs);
+
+            ChangeDestroyBlockSprite();
+            ChangeDestroyNeighborBlockSprite();
+        }
+
+        #region Change CreateSprite
+
+        void ChangeCreateBlockSprite()
+        {
+            if (!HasBlock)
+                return;
+
+            byte thisTileMask = 0x00;
+            byte neighborDirMask = 0x01;
+
+
+            foreach (var neighborTile in neighborTiles)
+            {
+                if (neighborTile?.block?.BlockInfo.Name == block.BlockInfo.Name)
+                {
+
+                    if (!block.BlockInfo.TileSet.IsOnlyCross || (block.BlockInfo.TileSet.IsOnlyCross && crossNeighborTiles.Contains(neighborTile)))
+                    {
+                        thisTileMask |= neighborDirMask;
+                    }
+                }
+                neighborDirMask <<= 1;
+            }
+
+            if (block.BlockInfo.TileSet.IsOnlyCross)
+                thisTileMask &= 0b_0101_1010;
+
+            block.Mask = thisTileMask;
+
+            var e = new ChangeBlockSpriteArgs(Vector3Int, block.BlockInfo.TileSet[thisTileMask]);
+            changedBlockSpriteEvent?.Invoke(this, e);            
+        }
+
+        void ChangeCreateNeighborBlockSprite()
+        {
+            if (!HasBlock)
+                return;
+
+            byte neighborDirMask = 0x01;
 
             byte neighborMask = 0x80;
-
-            ChangeBlockSpriteArgs e;
 
             foreach (var neighborTile in neighborTiles)
             {
@@ -85,26 +132,53 @@ namespace Worlds
                     {
                         neighborTile.block.Mask |= neighborMask;
 
-                        e = new ChangeBlockSpriteArgs(neighborTile.Vector3Int, neighborTile.block.BlockInfo.TileSet[neighborTile.block.Mask]);
+                        var e = new ChangeBlockSpriteArgs(neighborTile.Vector3Int, neighborTile.block.CurrentSprite);
                         changedBlockSpriteEvent?.Invoke(this, e);
-
-                        mask |= dirNeighborMask;
                     }
 
                 }
 
-                dirNeighborMask <<= 1;
+                neighborDirMask <<= 1;
                 neighborMask >>= 1;
             }
-
-            if (block.BlockInfo.TileSet.IsOnlyCross)
-                mask &= 0b_0101_1010;
-
-            e = new ChangeBlockSpriteArgs(Vector3Int, block.BlockInfo.TileSet[mask]);
-            changedBlockSpriteEvent?.Invoke(this, e);
-
-            block.Mask = mask;
         }
+
+        #endregion
+
+        #region Change DestroySprite
+
+        void ChangeDestroyBlockSprite()
+        {
+            if (HasBlock)
+                return;
+
+            var changeBlockSpriteArgs = new ChangeBlockSpriteArgs(Vector3Int, null);
+            changedBlockSpriteEvent?.Invoke(this, changeBlockSpriteArgs);
+        }
+
+        void ChangeDestroyNeighborBlockSprite()
+        {
+            if (HasBlock)
+                return;
+
+            byte neighborDirMask = 0x7F;
+
+            foreach (var neighborTile in neighborTiles)
+            {
+                if (neighborTile?.block != null)
+                {
+                    neighborTile.block.Mask &= neighborDirMask;
+
+                    var e = new ChangeBlockSpriteArgs(neighborTile.Vector3Int, neighborTile.block.CurrentSprite);
+                    changedBlockSpriteEvent?.Invoke(this, e);
+                }
+
+                neighborDirMask >>= 1;
+                neighborDirMask |= 0x80;
+            }
+        }
+
+        #endregion
 
     }
 }

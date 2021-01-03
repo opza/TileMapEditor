@@ -12,7 +12,7 @@ namespace Util.SerializableObjects
     public class Serializable2dArray<T> where T : class
     {
         [SerializeField]
-        [HideInInspector]
+        //[HideInInspector]
         T[] serializableArray;
 
         [SerializeField]
@@ -87,7 +87,7 @@ namespace Util.SerializableObjects
 
         int GetOffsetIndex(int x, int y)
         {
-            return xSize * x + y;
+            return ySize * x + y;
         }
 
         bool Inside(int x, int y)

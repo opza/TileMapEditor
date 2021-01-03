@@ -15,6 +15,7 @@ namespace Editor.Dungeon
         readonly string PALETTE_FILE_EXTENTION = "asset";
         readonly string BLOCK_INFO_FILE_EXTENTION = "asset";
 
+        [SerializeField]
         Palette currentPalette;
 
         VisualElement paletteElementPanel;
@@ -33,8 +34,8 @@ namespace Editor.Dungeon
 
             buildPaletteButton.clickable.clicked += () =>
             {
-                currentPalette = CreatePalette();             
-                DrawPaletteElement();
+                currentPalette = CreatePalette();
+                UpdatePalette();
             };
 
             loadBlockInfoPaletteButton.clickable.clicked += () =>
@@ -48,7 +49,6 @@ namespace Editor.Dungeon
                     return;
 
                 currentPalette.Add(loadedBlockInfo);
-                EditorUtility.SetDirty(currentPalette);
             };
 
             loadPaletteButton.clickable.clicked += () =>
@@ -56,7 +56,7 @@ namespace Editor.Dungeon
                 var loadPath = EditorUtility.OpenFilePanel("Palette 불러오기", Application.dataPath, PALETTE_FILE_EXTENTION);
 
                 currentPalette = LoadPalette(loadPath);
-                DrawPaletteElement();
+                UpdatePalette();
             };
         }
 
@@ -116,16 +116,22 @@ namespace Editor.Dungeon
             if (palette == null)
                 return;
 
-            palette.updateElementEvent += DrawPaletteElement;
+            palette.updateElementEvent += UpdatePalette;
         }
 
-        void DrawPaletteElement()
+        void UpdatePalette()
         {
-            if (currentPalette == null)
+            EditorUtility.SetDirty(currentPalette);
+            DrawPaletteElement(currentPalette);
+        }
+
+        void DrawPaletteElement(Palette palette)
+        {
+            if (palette == null)
                 return;
 
             paletteElementPanel.Clear();
-            foreach (var blockInfo in currentPalette)
+            foreach (var blockInfo in palette)
             {
                 if (blockInfo == null)
                     continue;
@@ -155,7 +161,7 @@ namespace Editor.Dungeon
             currentPalette.Remove(blockInfo);
 
             if (!currentPalette.Contains(selectedPaletteEelment.Value))
-                selectedPaletteEelment.Clear();
+                selectedPaletteEelment.Clear();          
         }
 
     }

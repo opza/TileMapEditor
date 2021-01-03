@@ -30,7 +30,15 @@ namespace Worlds
                 var mouseWorldPoint = MousePoint.GetWorldPoint();
                 var tile = world.GetTile(mouseWorldPoint);
 
-                tile?.OnCreatedBlock(BlockManager.Instance.GetBlockInfo("Block"));
+                tile?.BuildBlock(BlockManager.Instance.GetBlockInfo("Block"));
+            }
+
+            if (Input.GetMouseButton(1))
+            {
+                var mouseWorldPoint = MousePoint.GetWorldPoint();
+                var tile = world.GetTile(mouseWorldPoint);
+
+                tile?.DestroyBlock();
             }
         }
 

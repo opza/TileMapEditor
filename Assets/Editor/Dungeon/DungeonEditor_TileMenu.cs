@@ -19,6 +19,7 @@ namespace Editor.Dungeon
         readonly int MIN_WIDTH = 1;
         readonly int MIN_HEGIHT = 1;
 
+        [SerializeField]
         Room currentRoom; 
 
         Vector2IntField gridSizeField;
@@ -136,8 +137,7 @@ namespace Editor.Dungeon
             var gridElements = gridTilePanel.CreateGridButton(currentRoom.Width, currentRoom.Height, buildTileTree, OnClickTileButton);
             DrawGridButton(gridElements);
 
-            if (GUI.changed)
-                EditorUtility.SetDirty(currentRoom);
+            EditorUtility.SetDirty(currentRoom);
         }
 
         void DrawGridButton(VisualElement[,] elements)

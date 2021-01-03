@@ -12,8 +12,6 @@ namespace Editor.Dungeon
     [CreateAssetMenu(fileName = "DungeonPalette", menuName = "DungeonEditor/Palette")]
     public class Palette : ScriptableObject, IEnumerable<BlockInfo>
     {
-        readonly static int MIN_ARRAY_INDEX = 0;
-
         public event Action updateElementEvent;
 
         [SerializeField]
@@ -41,7 +39,7 @@ namespace Editor.Dungeon
 
         public void Remove(int idx)
         {
-            if (idx <= MIN_ARRAY_INDEX || idx >= elements.Count)
+            if (idx < 0 || idx >= elements.Count)
                 return;
 
             elements.RemoveAt(idx);

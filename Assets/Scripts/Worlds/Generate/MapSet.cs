@@ -22,55 +22,32 @@ namespace Worlds.Generate
 
         public int Count => rooms?.Count() ?? 0;
 
-        public (Room, Rect) GetRandomRoomWithMatchedDoor(Room room, Room.BorderDoorsGroup.DoorDirection direction, int idx)
+
+        // TODO : 3개 반환하는게 맞나?
+        public (Room selectedRoom, Rect relativeBorderDoorRect, Rect absoulteRoomRect) GetRoomWithMatchedDoor(Rect absoluteDoorRect, Room.BorderDoorsGroup.DoorDirection buildDirection)
         {
-            var doorRect = room.BorderDoorGroup[direction][idx];
-
-            var condidateRooms = rooms.RandomSwap();
-
-            foreach (var condidateRoom in condidateRooms)
-            {
-                var doorHeaders = condidateRoom.BorderDoorGroup.GetBorderDoorsForOppositeDirecton(direction);
-                if (doorHeaders.Count <= 0)
-                    continue;
-
-                foreach (var rect in doorHeaders)
-                {
-                    if (doorRect.width == rect.width && doorRect.height == rect.height)
-                        return (condidateRoom, rect);
-                }
-            }
-
-            return (null, Rect.zero);
-        }
-
-        public (Room, AbsoluteRoomRect) GetRoomWithMatchedDoor(AbsoluteDoorRect doorRect)
-        {
-            var absoluteDoorRect = doorRect.AbsoluteRect;
             //var condidateRooms = rooms.RandomSwap();
             // TEST
             var condidateRooms = rooms;
 
             foreach (var condidateRoom in condidateRooms)
             {
-                var borderDoors = condidateRoom.BorderDoorGroup.GetBorderDoorsForOppositeDirecton(doorRect.Direction);
+                var borderDoors = condidateRoom.BorderDoorGroup.GetBorderDoorsForOppositeDirecton(buildDirection);
                 foreach (var relativeDoor in borderDoors)
                 {
                     if (relativeDoor.width == absoluteDoorRect.width && relativeDoor.height == absoluteDoorRect.height)
                     {
-                        var absoluteRectX = (int)(absoluteDoorRect.x - relativeDoor.x);
-                        var absoluteRectY = (int)(absoluteDoorRect.y + relativeDoor.y);
+                        var absoluteRoomRect = new Rect(condidateRoom.rect);
+                        absoluteRoomRect.x = (int)(absoluteDoorRect.x - relativeDoor.x);
+                        absoluteRoomRect.y = (int)(absoluteDoorRect.y + relativeDoor.y);
 
-                        var absoluteRoomRect = new AbsoluteRoomRect(condidateRoom.rect, absoluteRectX, absoluteRectY);
-
-                        return (condidateRoom, absoluteRoomRect);
+                        return (condidateRoom, relativeDoor, absoluteRoomRect);
                     }
                 }
             }
 
-            return (null, AbsoluteRoomRect.zero);
+            return (null, Rect.zero, Rect.zero);
         }
-
 
 
     }

@@ -13,6 +13,8 @@ namespace Worlds
 
         public byte Mask { get; set; }
 
+        public Sprite CurrentSprite => blockInfo?.TileSet[Mask];
+
         public static Block Create(BlockInfo blockInfo)
         {
             var block = new Block(blockInfo);
