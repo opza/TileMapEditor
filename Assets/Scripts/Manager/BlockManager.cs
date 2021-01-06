@@ -21,6 +21,8 @@ namespace Worlds
         Dictionary<string, BlockInfo> blockInfos;
         public BlockInfo GetBlockInfo(string name) => blockInfos?[name];
 
+        Dictionary<Block, GameObject> linkedObjects = new Dictionary<Block, GameObject>();
+
         // Use this for initialization
         void Awake()
         {
@@ -31,19 +33,32 @@ namespace Worlds
 
             blockInfos = ResourceLoader.LoadBlockInfos("BlockInfo");
 
-            Tile.createdBlockEvent += CreateBlock;
-            Tile.changedBlockSpriteEvent += ChangeBlockSprite;
+            Tile.createdBlockEvent += OnCreateBlock;
+            Tile.destroyedBlockEvent += OnDestroyBlock;
+            Tile.changedBlockSpriteEvent += OnChangeBlockSprite;
         }
 
-        void CreateBlock(object sender, CreateBlcokObjectArgs e)
+       
+
+        void OnCreateBlock(object sender, CreateBlcokObjectArgs e)
         {
             if (e.Block.BlockInfo.Light == null)
                 return;
 
-            Instantiate(e.Block.BlockInfo.Light, new Vector3(e.X,e.Y), Quaternion.identity);
+            
+            var obj = Instantiate(e.Block.BlockInfo.Light, new Vector3(e.X,e.Y), Quaternion.identity);
+            linkedObjects[e.Block] = obj;
         }
 
-        void ChangeBlockSprite(object sender, ChangeBlockSpriteArgs e)
+        void OnDestroyBlock(object sender, DestrotyBlockOjectArgs e)
+        {
+            if (!linkedObjects.ContainsKey(e.Block))
+                return;
+
+            Destroy(linkedObjects[e.Block]);
+        }
+
+        void OnChangeBlockSprite(object sender, ChangeBlockSpriteArgs e)
         {
             if (e.Sprite == null)
             {

@@ -38,35 +38,27 @@ namespace Util
             return b;
         }
 
-        public static IList<T> RandomSwap<T>(this IList<T> list)
+        public static IEnumerable<T> RandomSwap<T>(this IEnumerable<T> enumerable)
         {
-            return list.ToArray().RandomSwap().ToList();
-        }
+            var swapArray = enumerable.ToArray();
 
-        public static T[] RandomSwap<T>(this T[] array)
-        {         
-
-            var swapArray = array.Clone() as T[];
-
-            if (array.Length <= 1)
+            if (swapArray.Length <= 1)
                 return swapArray;
-            
-            var random = new Random(Environment.TickCount);
 
-            for (int i = array.Length - 1; i > 0 ; i--)
+            var random = new Random(Environment.TickCount);
+            for (int i = swapArray.Length; i > 1; i--)
             {
-                var ranValue = random.Next(i);
-                swapArray.Swap(ranValue, i);
+                var ranIndex = random.Next(i);
+                swapArray.Swap(i - 1, ranIndex);
             }
 
             return swapArray;
-
-        }
+        }   
 
         public static void Swap<T>(this T[] swapArray, int idxA, int idxB)
         {
             var temp = swapArray[idxA];
-            swapArray[idxB] = swapArray[idxA];
+            swapArray[idxA] = swapArray[idxB];
             swapArray[idxB] = temp;
         }
 

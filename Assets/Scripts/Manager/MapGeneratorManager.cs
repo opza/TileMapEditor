@@ -59,7 +59,20 @@ namespace Worlds
 
         private void Start()
         {
-            mapGenerator.Generate(0);
+            
+        }
+
+        private void Update()
+        {
+            // TEST
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                world.RemoveAll();
+                mapGenerator.Clear();
+                mapGenerator.Generate(0);
+            }
+
+            
         }
     }
 

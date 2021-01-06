@@ -15,12 +15,29 @@ MonoBehaviour:
   doorGroup:
     doorGroup:
     - doorTiles:
-      - x: 4
-        y: 2
+      - x: 0
+        y: 3
         blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
         isDoor: 1
-      - x: 4
+      - x: 0
+        y: 4
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 0
+        y: 5
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+    - doorTiles:
+      - x: 6
         y: 3
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 6
+        y: 4
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 6
+        y: 5
         blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
         isDoor: 1
   borderDoorGroup:
@@ -31,15 +48,18 @@ MonoBehaviour:
       doorRects: []
       direction: 1
     leftBorderDoors:
-      doorRects: []
+      doorRects:
+      - x: 0
+        y: 3
+        width: 1
+        height: 3
       direction: 2
     rightBorderDoors:
       doorRects:
-      - serializedVersion: 2
-        x: 4
-        y: 2
+      - x: 6
+        y: 3
         width: 1
-        height: 2
+        height: 3
       direction: 3
   serializable2dTiles:
     serializableArray:
@@ -58,10 +78,18 @@ MonoBehaviour:
     - x: 0
       y: 3
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
+      isDoor: 1
     - x: 0
       y: 4
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 0
+      y: 5
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 0
+      y: 6
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
     - x: 1
       y: 0
@@ -81,6 +109,14 @@ MonoBehaviour:
       isDoor: 0
     - x: 1
       y: 4
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 5
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 6
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
     - x: 2
@@ -97,10 +133,18 @@ MonoBehaviour:
       isDoor: 0
     - x: 2
       y: 3
-      blockInfo: {fileID: 0}
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
     - x: 2
       y: 4
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 5
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 6
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
     - x: 3
@@ -117,10 +161,18 @@ MonoBehaviour:
       isDoor: 0
     - x: 3
       y: 3
-      blockInfo: {fileID: 0}
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
     - x: 3
       y: 4
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 5
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 6
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
     - x: 4
@@ -129,19 +181,83 @@ MonoBehaviour:
       isDoor: 0
     - x: 4
       y: 1
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      blockInfo: {fileID: 0}
       isDoor: 0
     - x: 4
       y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 3
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 4
+      y: 4
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 5
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 6
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 5
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 5
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 5
+      y: 4
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 5
+      y: 5
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 5
+      y: 6
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 6
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 6
+      y: 1
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 6
+      y: 2
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 6
+      y: 3
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 1
-    - x: 4
-      y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 1
-    - x: 4
+    - x: 6
       y: 4
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 6
+      y: 5
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 6
+      y: 6
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
-    xSize: 5
-    ySize: 5
+    xSize: 7
+    ySize: 7

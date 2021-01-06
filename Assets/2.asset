@@ -23,8 +23,21 @@ MonoBehaviour:
         y: 2
         blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
         isDoor: 1
-      - x: 1
+      - x: 0
+        y: 3
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+    - doorTiles:
+      - x: 9
         y: 1
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 9
+        y: 2
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 9
+        y: 3
         blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
         isDoor: 1
   borderDoorGroup:
@@ -36,14 +49,17 @@ MonoBehaviour:
       direction: 1
     leftBorderDoors:
       doorRects:
-      - serializedVersion: 2
-        x: 0
+      - x: 0
         y: 1
         width: 1
-        height: 2
+        height: 3
       direction: 2
     rightBorderDoors:
-      doorRects: []
+      doorRects:
+      - x: 9
+        y: 1
+        width: 1
+        height: 3
       direction: 3
   serializable2dTiles:
     serializableArray:
@@ -62,150 +78,190 @@ MonoBehaviour:
     - x: 0
       y: 3
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 0
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
     - x: 1
       y: 0
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
     - x: 1
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 2
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 2
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 3
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 3
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 4
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 4
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 5
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 5
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 5
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 6
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 6
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 6
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 6
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 6
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 7
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 7
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 7
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 7
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 7
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 8
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 8
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 8
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 8
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 8
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 9
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 9
       y: 1
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 1
-    - x: 1
-      y: 2
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 1
-      y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 2
-      y: 0
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 2
-      y: 1
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 2
-      y: 2
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 2
-      y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 3
-      y: 0
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 3
-      y: 1
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 3
-      y: 2
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 3
-      y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 4
-      y: 0
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 4
-      y: 1
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 4
-      y: 2
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 4
-      y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 5
-      y: 0
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 5
-      y: 1
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 5
-      y: 2
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 5
-      y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 6
-      y: 0
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 6
-      y: 1
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 6
-      y: 2
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 6
-      y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 7
-      y: 0
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 7
-      y: 1
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 7
-      y: 2
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 7
-      y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 8
-      y: 0
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 8
-      y: 1
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 8
-      y: 2
-      blockInfo: {fileID: 0}
-      isDoor: 0
-    - x: 8
-      y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 9
-      y: 0
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
-    - x: 9
-      y: 1
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
     - x: 9
       y: 2
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
-      isDoor: 0
+      isDoor: 1
     - x: 9
       y: 3
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 9
+      y: 4
       blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
       isDoor: 0
     xSize: 10
-    ySize: 4
+    ySize: 5

@@ -70,12 +70,12 @@ namespace Worlds
         public void DestroyBlock()
         {
             if (!HasBlock)
-                return;
+                return;       
+
+            var destroyBlockArgs = new DestrotyBlockOjectArgs(x, y, block);           
+            destroyedBlockEvent?.Invoke(this, destroyBlockArgs);
 
             block = null;
-
-            var destroyBlockArgs = new DestrotyBlockOjectArgs(x, y);           
-            destroyedBlockEvent?.Invoke(this, destroyBlockArgs);
 
             ChangeDestroyBlockSprite();
             ChangeDestroyNeighborBlockSprite();

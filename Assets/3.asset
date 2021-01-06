@@ -1,0 +1,396 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726a23c542c50f44daaed4778405e403, type: 3}
+  m_Name: 3
+  m_EditorClassIdentifier: 
+  doorGroup:
+    doorGroup:
+    - doorTiles:
+      - x: 0
+        y: 1
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 0
+        y: 2
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 0
+        y: 3
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+    - doorTiles:
+      - x: 0
+        y: 9
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 0
+        y: 10
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 0
+        y: 11
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+    - doorTiles:
+      - x: 5
+        y: 6
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 5
+        y: 7
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+      - x: 5
+        y: 8
+        blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+        isDoor: 1
+  borderDoorGroup:
+    topBorderDoors:
+      doorRects: []
+      direction: 0
+    BottomBorderDoors:
+      doorRects: []
+      direction: 1
+    leftBorderDoors:
+      doorRects:
+      - x: 0
+        y: 1
+        width: 1
+        height: 3
+      - x: 0
+        y: 9
+        width: 1
+        height: 3
+      direction: 2
+    rightBorderDoors:
+      doorRects:
+      - x: 5
+        y: 6
+        width: 1
+        height: 3
+      direction: 3
+  serializable2dTiles:
+    serializableArray:
+    - x: 0
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 0
+      y: 1
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 0
+      y: 2
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 0
+      y: 3
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 0
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 0
+      y: 5
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 0
+      y: 6
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 0
+      y: 7
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 0
+      y: 8
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 0
+      y: 9
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 0
+      y: 10
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 0
+      y: 11
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 0
+      y: 12
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 1
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 1
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 1
+      y: 5
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 6
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 7
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 8
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 9
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 10
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 11
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 1
+      y: 12
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 2
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 2
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 2
+      y: 5
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 6
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 7
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 8
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 9
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 10
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 11
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 2
+      y: 12
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 3
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 3
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 4
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 5
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 6
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 7
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 8
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 9
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 3
+      y: 10
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 11
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 3
+      y: 12
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 4
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 4
+      y: 1
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 2
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 3
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 4
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 5
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 6
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 7
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 8
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 9
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 4
+      y: 10
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 11
+      blockInfo: {fileID: 0}
+      isDoor: 0
+    - x: 4
+      y: 12
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 0
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 1
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 2
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 3
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 4
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 5
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 6
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 5
+      y: 7
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 5
+      y: 8
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 1
+    - x: 5
+      y: 9
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 10
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 11
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    - x: 5
+      y: 12
+      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      isDoor: 0
+    xSize: 6
+    ySize: 13

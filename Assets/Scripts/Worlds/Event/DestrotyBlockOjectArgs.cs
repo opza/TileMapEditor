@@ -10,10 +10,13 @@ namespace Worlds
         public int X { get; }
         public int Y { get; }
 
-        public DestrotyBlockOjectArgs(int x, int y)
+        public Block Block { get; }
+
+        public DestrotyBlockOjectArgs(int x, int y, Block block)
         {
             X = x;
             Y = y;
+            Block = block;
         }
     }
 }

@@ -26,6 +26,14 @@ namespace Worlds
             SetWorldTilesNeighbor(tiles);
         }
 
+        public void RemoveAll()
+        {
+            foreach (var tile in tiles)
+            {
+                tile.DestroyBlock();
+            }
+        }
+
         public Tile GetTile(Vector2 pos)
         {
             var x = (int)pos.x;

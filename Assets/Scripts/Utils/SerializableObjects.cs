@@ -12,7 +12,7 @@ namespace Util.SerializableObjects
     public class Serializable2dArray<T> where T : class
     {
         [SerializeField]
-        //[HideInInspector]
+        [HideInInspector]
         T[] serializableArray;
 
         [SerializeField]

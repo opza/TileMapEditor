@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,7 +27,7 @@ namespace Worlds.Generate
         }
 
         MapGenerator() { }
-
+      
         public void Generate(int level)
         {
             if (levelMapSets.Count <= level)
@@ -41,38 +42,26 @@ namespace Worlds.Generate
             {
                 if (level == 0)
                 {
-                    // TEST
-                    //var randomRoom = currMap.GetRandomRoom();
-                    var randomRoom = currMap[0];
+                    var randomRoom = currMap.GetRandomRoom();
                     var startX = world.Width / 2;
                     var startY = world.Height / 2;
 
+                    AddCondidateDoorInRoom(randomRoom, startX, startY, 0);
                     Build(randomRoom, startX, startY);
 
-                    foreach (var borderDoors in randomRoom.BorderDoorGroup.AllBorderDoors)
-                    {
-                        foreach (var doorRect in borderDoors)
-                        {
-                            var absoluteDoorRect = ConvertToAbsoluteDoorRect(doorRect, startX, startY);
-                            var buildCondidate = new BuildCondidate(randomRoom, doorRect, absoluteDoorRect, borderDoors.Direction);
-
-                            levelMapSets[level].BuildedCondidates.Enqueue(buildCondidate);
-                        }
-                    }
                 }
                 else
                     return;
 
             }
 
-            var mapSize = CalculateBuildedMapSize(currMap.Count);
+            // TEST
+            var mapSize = 10;//CalculateBuildedMapSize(currMap.Count);
             var currSize = 0;
 
             var doorCondidates = levelMapSets[level].BuildedCondidates;
 
-
-            // TODO : 맵 전체의 Door후보와 현재 만드는 던전맵의 Door후보를 따로 나눠서 계산해야할 듯
-            while (mapSize > currSize++ && doorCondidates.Count > 0)
+            while (mapSize > currSize && doorCondidates.Count > 0)
             {
                 var selectedCondidate = doorCondidates.Dequeue();
                 var selectedRoomInfo = currMap.GetRoomWithMatchedDoor(selectedCondidate.AbsoluteDoorRect, selectedCondidate.Direction);
@@ -81,34 +70,55 @@ namespace Worlds.Generate
                 var relatvieDoorRect = selectedRoomInfo.relativeBorderDoorRect;
                 var absoluteRoomRect = selectedRoomInfo.absoulteRoomRect;
 
-                Build(selectedRoom, (int)absoluteRoomRect.x, (int)absoluteRoomRect.y);
+                if (selectedRoom == null)
+                    continue;
 
-                // TODO : DoorGorup을 제거해야함
-                var doorTiles = selectedRoom.DoorGroup.GetDoorTiles((int)relatvieDoorRect.x, (int)relatvieDoorRect.y);
+                if (!CanBuildWithoutBorder(absoluteRoomRect))
+                    continue;
 
-                Remove(doorTiles, (int)absoluteRoomRect.x, (int)absoluteRoomRect.y);
+                AddCondidateDoorInRoom(selectedRoom, absoluteRoomRect.x, absoluteRoomRect.y, 0);
+                Build(selectedRoom, absoluteRoomRect.x, absoluteRoomRect.y);              
+
+                RemoveDoorTiles(selectedCondidate.Room, selectedCondidate.RelativeDoorRect, selectedCondidate.AbsoluteRoomRect);                
+                RemoveDoorTiles(selectedRoom, relatvieDoorRect, absoluteRoomRect);
+
+                currSize++;
             }
 
         }
 
-        int CalculateBuildedMapSize(int roomCount)
+        public void Clear()
         {
-            var minMapSize = Mathf.RoundToInt(roomCount * .5f);
-            minMapSize = minMapSize <= 0 ? 1 : minMapSize;
-
-            var maxMapSize = Mathf.RoundToInt(roomCount * 1.5f);
-
-            var mapSize = UnityEngine.Random.Range(minMapSize, maxMapSize);
-            return mapSize;
+            levelMapSets.ForEach(mapset => mapset.BuildedCondidates.Clear());
         }
 
-        void Build(Room room, int pivotX, int pivotY)
+        void AddCondidateDoorInRoom(Room room, int absoluteRoomX, int absoluteRoomY, int level)
+        {
+            foreach (var borderDoors in room.BorderDoorGroup.AllBorderDoors)
+            {
+                foreach (var doorRect in borderDoors)
+                {
+                    var absoluteRoomRect = new RectInt(absoluteRoomX, absoluteRoomY, doorRect.width, doorRect.height);
+                    var absoluteDoorRect = ConvertToAbsoluteDoorRect(doorRect, absoluteRoomX, absoluteRoomY);
+                    if (!CanBuild(absoluteDoorRect))
+                        continue;
+
+                    var buildCondidate = new BuildCondidate(room, absoluteRoomRect, doorRect, absoluteDoorRect, borderDoors.Direction);
+
+                    levelMapSets[level].BuildedCondidates.Enqueue(buildCondidate);
+                }
+            }
+        }    
+
+        #region Build
+
+        void Build(Room room, int absoluteRoomX, int absoluteRoomY)
         {
             for (int x = 0; x < room.Width; x++)
             {
                 for (int y = 0; y < room.Height; y++)
                 {
-                    var worldTile = world.GetTile(pivotX + x, pivotY - y);
+                    var worldTile = world.GetTile(absoluteRoomX + x, absoluteRoomY - y);
                     if (worldTile == null)
                         continue;
 
@@ -122,19 +132,21 @@ namespace Worlds.Generate
                     worldTile.BuildBlock(roomTile.BlockInfo);
                 }
             }
+        }  
+
+        bool CanBuildWithoutBorder(RectInt buildRect)
+        {
+            return CanBuildWithoutBorder(buildRect.x, buildRect.y, buildRect.width, buildRect.height);
         }
 
-        // TODO : 제거시를 만들어야함
-        void Remove(Room.Tile[] doorTiles, int pivotX, int pivotY)
+        bool CanBuildWithoutBorder(int startX, int startY, int width, int height)
         {
-            foreach (var doorTile in doorTiles)
-            {
-                var absoluteX = pivotX + doorTile.X;
-                var absoluteY = pivotY - doorTile.Y;
+            return CanBuild(startX + 1, startY - 1, width - 2, height - 2);
+        }
 
-                var worldTile = world.GetTile(absoluteX, absoluteY);
-                worldTile?.DestroyBlock();
-            }
+        bool CanBuild(RectInt buildRect)
+        {
+            return CanBuild(buildRect.x, buildRect.y, buildRect.width, buildRect.height);
         }
 
         bool CanBuild(int startX, int startY, int width, int height)
@@ -151,14 +163,50 @@ namespace Worlds.Generate
             return true;
         }
 
-        Rect ConvertToAbsoluteDoorRect(Rect relativePosition, int worldRoomX, int worldRoomY)
+        #endregion
+
+        #region Remove
+
+        void RemoveDoorTiles(Room room, RectInt relativeDoorRect, RectInt absoluteRoomRect)
         {
-            var absolutePos = new Rect(relativePosition);
+            var doorTiles = room.DoorGroup.GetDoorTiles(relativeDoorRect.x, relativeDoorRect.y);
+            Remove(doorTiles, absoluteRoomRect.x, absoluteRoomRect.y);
+        }
+
+        void Remove(Room.Tile[] roomTiles, int absoluteRoomX, int absoluteRoomY)
+        {
+            foreach (var roomtile in roomTiles)
+            {
+                var absoluteX = absoluteRoomX + roomtile.X;
+                var absoluteY = absoluteRoomY - roomtile.Y;
+
+                var worldTile = world.GetTile(absoluteX, absoluteY);
+                worldTile?.DestroyBlock();
+            }
+        }
+
+        #endregion
+
+        RectInt ConvertToAbsoluteDoorRect(RectInt relativePosition, int worldRoomX, int worldRoomY)
+        {
+            var absolutePos = relativePosition;
             absolutePos.x = worldRoomX + absolutePos.x;
             absolutePos.y = worldRoomY - absolutePos.y;
 
             return absolutePos;
         }
+
+        int CalculateBuildedMapSize(int roomCount)
+        {
+            var minMapSize = Mathf.RoundToInt(roomCount * .5f);
+            minMapSize = minMapSize <= 0 ? 1 : minMapSize;
+
+            var maxMapSize = Mathf.RoundToInt(roomCount * 1.5f);
+
+            var mapSize = UnityEngine.Random.Range(minMapSize, maxMapSize);
+            return mapSize;
+        }
+
 
         public class LevelMapSet
         {
@@ -180,14 +228,17 @@ namespace Worlds.Generate
         {
             public Room Room { get; }
 
-            public Rect RelativeDoorRect { get; }
-            public Rect AbsoluteDoorRect { get; }
+
+            public RectInt AbsoluteRoomRect { get; }
+            public RectInt RelativeDoorRect { get; }
+            public RectInt AbsoluteDoorRect { get; }
 
             public Room.BorderDoorsGroup.DoorDirection Direction { get; }
 
-            public BuildCondidate(Room room, Rect relativeDoorRect, Rect absoluteDoorRect, Room.BorderDoorsGroup.DoorDirection direction)
+            public BuildCondidate(Room room, RectInt absoulteRoomRect, RectInt relativeDoorRect, RectInt absoluteDoorRect, Room.BorderDoorsGroup.DoorDirection direction)
             {
                 Room = room;
+                AbsoluteRoomRect = absoulteRoomRect;
                 RelativeDoorRect = relativeDoorRect;
                 AbsoluteDoorRect = absoluteDoorRect;
                 Direction = direction;

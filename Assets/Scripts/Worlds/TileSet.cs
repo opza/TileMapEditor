@@ -35,7 +35,7 @@ namespace Worlds
                     return tileSetElement.Sprite;
             }
 
-            Debug.LogError($"{Convert.ToString(mask, 2).PadLeft(8, '0')}에 해당하는 요소가 없습니다");
+            //Debug.LogError($"{Convert.ToString(mask, 2).PadLeft(8, '0')}에 해당하는 요소가 없습니다");
             return Default;
             
         }

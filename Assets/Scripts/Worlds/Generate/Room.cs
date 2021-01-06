@@ -38,7 +38,7 @@ namespace Worlds.Generate
         public int Width => tiles != null ? tiles.GetLength(0) : 0;
         public int Height => tiles != null ? tiles.GetLength(1) : 0;
 
-        public Rect rect => new Rect(0, 0, Width, Height);
+        public RectInt rect => new RectInt(0, 0, Width, Height);
 
         public void SetSize(int resizedWidth, int resizedHeight)
         {
@@ -400,14 +400,14 @@ namespace Worlds.Generate
                 }
             }
 
-            
-            Rect[] GetRowDoors(Room room, int y)
+
+            RectInt[] GetRowDoors(Room room, int y)
             {
-                var rowDoors = new List<Rect>();
+                var rowDoors = new List<RectInt>();
                 if (room.Width == 1)
                 {
                     if (room.GetTile(0, y).IsDoor)
-                        rowDoors.Add(new Rect(0, y, 1, 1));
+                        rowDoors.Add(new RectInt(0, y, 1, 1));
 
                     return rowDoors.ToArray();
                 }
@@ -425,19 +425,19 @@ namespace Worlds.Generate
                             currStartX = x;
 
                             if (x == room.Width - 1)
-                                rowDoors.Add(new Rect(currStartX, y, 1, 1));
+                                rowDoors.Add(new RectInt(currStartX, y, 1, 1));
                         }
                         else
                         {
                             if (x == room.Width - 1)
-                                rowDoors.Add(new Rect(currStartX, y, x - currStartX + 1, 1));
+                                rowDoors.Add(new RectInt(currStartX, y, x - currStartX + 1, 1));
                         }
 
                     }
                     else
                     {
                         if (lastTile.IsDoor)
-                            rowDoors.Add(new Rect(currStartX, y, x - currStartX, 1));
+                            rowDoors.Add(new RectInt(currStartX, y, x - currStartX, 1));
                     }
 
                     lastTile = tile;
@@ -446,13 +446,13 @@ namespace Worlds.Generate
                 return rowDoors.ToArray();
             }
 
-            Rect[] GetColumnDoors(Room room, int x)
+            RectInt[] GetColumnDoors(Room room, int x)
             {
-                var columnDoors = new List<Rect>();
+                var columnDoors = new List<RectInt>();
                 if (room.Height == 1)
                 {
                     if (room.GetTile(x, 0).IsDoor)
-                        columnDoors.Add(new Rect(x, 0, 1, 1));
+                        columnDoors.Add(new RectInt(x, 0, 1, 1));
 
                     return columnDoors.ToArray();
                 }
@@ -470,18 +470,18 @@ namespace Worlds.Generate
                             currStartY = y;
 
                             if (y == room.Height - 1)
-                                columnDoors.Add(new Rect(x, currStartY, 1, 1));
+                                columnDoors.Add(new RectInt(x, currStartY, 1, 1));
                         }
                         else
                         {
                             if (y == room.Height - 1)
-                                columnDoors.Add(new Rect(x, currStartY, 1, y - currStartY + 1));
+                                columnDoors.Add(new RectInt(x, currStartY, 1, y - currStartY + 1));
                         }
                     }
                     else
                     {
                         if (lastTile.IsDoor)
-                            columnDoors.Add(new Rect(x, currStartY, 1, y - currStartY));
+                            columnDoors.Add(new RectInt(x, currStartY, 1, y - currStartY));
                     }
 
                     lastTile = tile;
@@ -491,29 +491,29 @@ namespace Worlds.Generate
             }
 
             [Serializable]
-            public class BorderDoors : IEnumerable<Rect>
+            public class BorderDoors : IEnumerable<RectInt>
             {
 
                 [SerializeField]
-                Rect[] doorRects;
+                RectInt[] doorRects;
 
                 [SerializeField]
                 DoorDirection direction;
 
                 public DoorDirection Direction => direction;
 
-                public Rect this[int idx] => doorRects[idx];
+                public RectInt this[int idx] => doorRects[idx];
                 public int Count => doorRects.Count();
 
-                public BorderDoors(Rect[] doorRects, DoorDirection direction)
+                public BorderDoors(RectInt[] doorRects, DoorDirection direction)
                 {
                     this.doorRects = doorRects;
                     this.direction = direction;
                 }
 
-                public IEnumerator<Rect> GetEnumerator()
+                public IEnumerator<RectInt> GetEnumerator()
                 {
-                    return ((IEnumerable<Rect>)doorRects).GetEnumerator();
+                    return ((IEnumerable<RectInt>)doorRects).GetEnumerator();
                 }
 
                 IEnumerator IEnumerable.GetEnumerator()
