@@ -24,7 +24,7 @@ namespace Editor.Dungeon
         Button loadBlockInfoPaletteButton;
         Button loadPaletteButton;
 
-        void SetPaletteMenu(VisualElement root)
+        void InitPaletteMenu(VisualElement root)
         {
             paletteElementPanel = root.Query<VisualElement>("palette-element-panel").First();
 
@@ -143,7 +143,7 @@ namespace Editor.Dungeon
                 elementButton.clickable.clicked += () => 
                 {
                     selectedPaletteEelment.SetValue(blockInfo);
-                    currentTileEvent = SetTile;
+                    drawer.DrawAction = SetTile;
                 };
 
                 var removeButton = elementTemplate.Query<Button>("remove-button").First();

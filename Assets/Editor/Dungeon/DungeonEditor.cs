@@ -39,8 +39,10 @@ namespace Editor.Dungeon
 
             selectedPaletteEelment = new SelectedItem<BlockInfo>();           
 
-            SetBuildMenu(root);
-            SetPaletteMenu(root);
+            InitBuildMenu(root);
+            InitDrawMenu(root);
+
+            InitPaletteMenu(root);
         }
 
         void SetMainTree(VisualElement root)

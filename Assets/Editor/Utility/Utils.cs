@@ -9,6 +9,17 @@ using UnityEngine;
 
 namespace Editor.Utility
 {
+
+    public static class Util
+    {
+        public static void Swap<T>(ref T a, ref T b)
+        {
+            T buf = b;
+            b = a;
+            a = buf;
+        }
+    }
+
     public static class Path
     {
         public static string ConvertUnityRelativePath(string absoultePath)

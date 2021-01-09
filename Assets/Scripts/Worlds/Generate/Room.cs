@@ -16,8 +16,8 @@ namespace Worlds.Generate
     [Serializable]
     public class Room : ScriptableObject, ISerializationCallbackReceiver
     {
-
-        public event Action updateEvent;
+        public event Action resizeEvent;
+        public event Action<int, int> updateTileEvent;
 
         Tile[,] tiles;
 
@@ -49,7 +49,7 @@ namespace Worlds.Generate
             tiles = resizedTiles;
 
             UpdateDoorTile();
-            updateEvent?.Invoke();
+            resizeEvent?.Invoke();
         }
 
         public void SetTile(BlockInfo blockInfo, int x, int y)
@@ -62,7 +62,7 @@ namespace Worlds.Generate
             else
                 tiles[x, y] = Tile.Create(x, y, blockInfo, tiles[x, y].IsDoor);
 
-            updateEvent?.Invoke();
+            updateTileEvent?.Invoke(x, y);
         }
 
         public void SwitchDoor(int x, int y)
@@ -73,7 +73,7 @@ namespace Worlds.Generate
             tiles[x, y].IsDoor = !tiles[x, y].IsDoor;
 
             UpdateDoorTile();
-            updateEvent?.Invoke();
+            updateTileEvent?.Invoke(x, y);
         }
 
         public Tile GetTile(int x, int y)

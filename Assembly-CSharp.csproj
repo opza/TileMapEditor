@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Worlds\World.cs" />
     <Compile Include="Assets\Scripts\Worlds\TileSet.cs" />
     <Compile Include="Assets\Scripts\Worlds\Generate\BlockInfo.cs" />
+    <Compile Include="Assets\Scripts\Worlds\Event\DestrotyBlockOjectArgs.cs" />
     <Compile Include="Assets\Scripts\Manager\BlockManager.cs" />
     <Compile Include="Assets\Scripts\Utils\Extention.cs" />
     <Compile Include="Assets\Scripts\Utils\SerializableObjects.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Assets\Scripts\Worlds\Tile.cs" />
     <Compile Include="Assets\Scripts\Worlds\Block.cs" />
     <Compile Include="Assets\Scripts\Manager\MapGeneratorManager.cs" />
-    <Compile Include="Assets\Scripts\Worlds\Event\DestrotyBlockOjectArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

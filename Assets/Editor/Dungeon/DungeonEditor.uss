@@ -1,34 +1,31 @@
-#root-panel{
-    flex-direction: row;    
-    
+#root-panel {
+    flex-direction: row;
     min-height: 1000px;
 }
 
-#main-panel{
+#main-panel {
     width: 80%;
     height: 100%;
 }
 
-#main-button-panel{
+#main-menu-panel VisualElement {
     flex-direction: row;
 }
 
-#size-field{
+#size-field {
     font-size: 20px;
     -unity-font-style: bold;
-
 }
 
-#size-field Label{
+#size-field Label {
     font-size: 10px;
 }
 
-#palette-panel{
+#palette-panel {
     width: 20%;
 }
 
-#palette-element-panel{
+#palette-element-panel {
     padding-left: 30%;
     align-content: center;
 }
-

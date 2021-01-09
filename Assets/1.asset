@@ -133,7 +133,7 @@ MonoBehaviour:
       isDoor: 0
     - x: 2
       y: 3
-      blockInfo: {fileID: 11400000, guid: 028fadeae490f6340b4d1c49497a3de0, type: 2}
+      blockInfo: {fileID: 0}
       isDoor: 0
     - x: 2
       y: 4

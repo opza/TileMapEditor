@@ -10,6 +10,7 @@ using System.Data;
 using Editor.Utility;
 
 using Worlds.Generate;
+using Editor.Dungeon.Draw;
 
 namespace Editor.Dungeon
 {
@@ -19,8 +20,14 @@ namespace Editor.Dungeon
         readonly int MIN_WIDTH = 1;
         readonly int MIN_HEGIHT = 1;
 
+        readonly string DOT_DRAW_MODE_TEXT = "연필 모드";
+        readonly string LINE_DRAW_MODE_TEXT = "선 모드";
+        readonly string REMOVE_MODE_TEXT = "지우기 모드";
+
         [SerializeField]
-        Room currentRoom; 
+        Room currentRoom;
+
+        IDrawer drawer;
 
         Vector2IntField gridSizeField;
         VisualElement gridTilePanel;
@@ -31,24 +38,29 @@ namespace Editor.Dungeon
         Button removeButton;
         Button setDoorButton;
 
-        Action<int, int> currentTileEvent;
+        Button setDotDrawButton;
+        Button setLineDrawButton;
+        Label drawModeLabel;
 
-        void SetBuildMenu(VisualElement root)
+        VisualElement[,] gridElements;
+
+        #region Init
+
+        void InitBuildMenu(VisualElement root)
         {
             gridSizeField = root.Query<Vector2IntField>("size-field").First();
             gridTilePanel = root.Query<VisualElement>("tile-panel").First();
 
             buildButton = root.Query<Button>("build-tiles-button").First();
             loadButton = root.Query<Button>("load-tiles-button").First();
-            resizeButton = root.Query<Button>("resize-tile-button").First();
-            removeButton = root.Query<Button>("remove-tile-button").First();
+            resizeButton = root.Query<Button>("resize-tile-button").First();         
             setDoorButton = root.Query<Button>("set-door-button").First();
 
             buildButton.clickable.clicked += () =>
             {      
                 currentRoom = CreateRoom(gridSizeField.value.x, gridSizeField.value.y);
 
-                UpdateBuildMenu();
+                CreateGridButton();
             };
 
             loadButton.clickable.clicked += () =>
@@ -56,7 +68,7 @@ namespace Editor.Dungeon
                 var loadPath = EditorUtility.OpenFilePanel("Room 불러오기", Application.dataPath, ROOM_FILE_EXTENTION);
                 currentRoom = LoadRoom(loadPath);
 
-                UpdateBuildMenu();
+                CreateGridButton();
             };
 
             resizeButton.clickable.clicked += () =>
@@ -68,22 +80,48 @@ namespace Editor.Dungeon
                     return;
 
                 currentRoom?.SetSize(width, height);
-
-                UpdateBuildMenu();
-            };
-
-            removeButton.clickable.clicked += () =>
-            {
-                selectedPaletteEelment.Clear();
-                currentTileEvent = SetTile;
-            };
+            };       
 
             setDoorButton.clickable.clicked += () =>
             {
                 selectedPaletteEelment.Clear();
-                currentTileEvent = SetDoor;
+                drawer.DrawAction = SwitchDoorInTile;
             };
         }
+
+        void InitDrawMenu(VisualElement root)
+        {
+            drawer = new DotDrawer();
+
+            setDotDrawButton = root.Query<Button>("set-dot-button").First();
+            setLineDrawButton = root.Query<Button>("set-line-button").First();
+            removeButton = root.Query<Button>("remove-tile-button").First();
+            drawModeLabel = root.Query<Label>("draw-mode-label").First();
+
+            setDotDrawButton.clickable.clicked += () =>
+            {
+                drawer = new DotDrawer(SetTile);
+                drawModeLabel.text = DOT_DRAW_MODE_TEXT;
+            };
+
+            setLineDrawButton.clickable.clicked += () =>
+            {
+                drawer = new LineDrawer(SetTile);
+                drawModeLabel.text = LINE_DRAW_MODE_TEXT;
+            };
+
+            removeButton.clickable.clicked += () =>
+            {
+                drawModeLabel.text = REMOVE_MODE_TEXT;
+
+                selectedPaletteEelment.Clear();
+                drawer.DrawAction = SetTile;
+            };
+        }
+
+        #endregion
+
+        #region Room
 
         Room CreateRoom(int width, int height)
         {
@@ -118,6 +156,7 @@ namespace Editor.Dungeon
             }
 
             InitRoom(loadedRoom);
+            gridSizeField.value = new Vector2Int(loadedRoom.Width, loadedRoom.Height);
 
             return loadedRoom;
         }
@@ -125,19 +164,23 @@ namespace Editor.Dungeon
 
         void InitRoom(Room room)
         {
-            room.updateEvent += UpdateBuildMenu;
+            room.resizeEvent += CreateGridButton;
+            room.updateTileEvent += UpdateTile;
         }
 
-        void UpdateBuildMenu()
+        #endregion
+
+        #region Create Grid
+
+        void CreateGridButton()
         {
             gridTilePanel.Clear();
             if (currentRoom == null)
                 return;
 
-            var gridElements = gridTilePanel.CreateGridButton(currentRoom.Width, currentRoom.Height, buildTileTree, OnClickTileButton);
+            gridElements = gridTilePanel.CreateGridButton(currentRoom.Width, currentRoom.Height, buildTileTree, OnClickTileButton);
             DrawGridButton(gridElements);
-
-            EditorUtility.SetDirty(currentRoom);
+            
         }
 
         void DrawGridButton(VisualElement[,] elements)
@@ -155,18 +198,41 @@ namespace Editor.Dungeon
             {
                 for (int y = 0; y < currentRoom.Height; y++)
                 {
-                    var button = elements[x, y].Query<Button>().First();
-                    button.style.backgroundImage = currentRoom[x, y].BlockInfo?.PreviewTexture;
-
-                    if(currentRoom[x,y]?.IsDoor == true)
-                        button.style.backgroundColor = new StyleColor(Color.black);
+                    UpdateTile(x, y, elements);
                 }
             }
         }
 
+        #endregion
+
+        #region UpdateTile
+
+        void UpdateTile(int x, int y)
+        {
+            UpdateTile(x, y, gridElements);
+        }
+
+        void UpdateTile(int x, int y, VisualElement[,] anotherGridElements)
+        {
+            if (anotherGridElements == null)
+                return;
+
+            var button = anotherGridElements[x, y].Query<Button>().First();
+            button.style.backgroundImage = currentRoom[x, y].BlockInfo?.PreviewTexture;
+
+            if (currentRoom[x, y]?.IsDoor == true)
+                button.style.SetBordersColor(new StyleColor(Color.yellow));
+            else
+                button.style.SetBordersColor(new StyleColor());
+
+            EditorUtility.SetDirty(currentRoom);
+        }
+
+        #endregion
+
         void OnClickTileButton(int x, int y)
         {
-            currentTileEvent?.Invoke(x, y);
+            drawer?.Draw(x, y);
         }
 
         void SetTile(int x, int y)
@@ -174,7 +240,7 @@ namespace Editor.Dungeon
             currentRoom.SetTile(selectedPaletteEelment.Value, x, y);
         }
 
-        void SetDoor(int x, int y)
+        void SwitchDoorInTile(int x, int y)
         {
             currentRoom.SwitchDoor(x, y);
         }

@@ -1,32 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
->
-  <engine:Style src="DungeonEditor.uss"/>
-  <engine:VisualElement name="root-panel">
-    <engine:Box name="main-panel">
-      <editor:Vector2IntField name="size-field"/>
-      <engine:VisualElement name="main-button-panel">
-        <engine:Button name="build-tiles-button" text="새로 만들기"/>
-        <engine:Button name="load-tiles-button" text="불러오기"/>
-        <engine:Button name="resize-tile-button" text="Resize"/>
-        <engine:Button name="remove-tile-button" text="Remove Tile"/>
-        <engine:Button name="set-door-button" text="Set Door"/>
-      </engine:VisualElement>
-      <engine:ScrollView name="tile-panel" mode="VerticalAndHorizontal"/>
-    </engine:Box>
-
-    <engine:Box name="palette-panel">
-      <engine:VisualElement>
-        <engine:Button name="build-palette-button" text="새로 만들기"/>
-        <engine:Button name="load-palette-button" text="불러오기"/>
-        <engine:Button name="add-palette-button" text="추가"/>      
-      </engine:VisualElement>
-      <engine:ScrollView name="palette-element-panel"/>
-    </engine:Box>
-  </engine:VisualElement>
-  
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="DungeonEditor.uss" />
+    <ui:VisualElement name="root-panel">
+        <ui:Box name="main-panel" style="flex-direction: column;">
+            <uie:Vector2IntField name="size-field" />
+            <ui:VisualElement name="main-menu-panel">
+                <ui:VisualElement name="main-button-panel">
+                    <ui:Button name="build-tiles-button" text="새로 만들기" />
+                    <ui:Button name="load-tiles-button" text="불러오기" />
+                    <ui:Button name="resize-tile-button" text="Resize" />
+                    <ui:Button name="set-door-button" text="Set Door" />
+                </ui:VisualElement>
+                <ui:VisualElement name="draw-button-panel">
+                    <ui:Button name="remove-tile-button" text="지우기" />
+                    <ui:Button text="연필" display-tooltip-when-elided="false" name="set-dot-button" />
+                    <ui:Button text="직선" display-tooltip-when-elided="false" name="set-line-button" />
+                    <ui:Label text="-" display-tooltip-when-elided="true" name="draw-mode-label" />
+                </ui:VisualElement>
+                <ui:VisualElement name="object-button-panel">
+                    <ui:Button text="오브젝트 추가" display-tooltip-when-elided="true" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:ScrollView name="tile-panel" mode="VerticalAndHorizontal" show-horizontal-scroller="false" show-vertical-scroller="false" vertical-page-size="10" horizontal-page-size="10" />
+        </ui:Box>
+        <ui:Box name="palette-panel">
+            <ui:VisualElement>
+                <ui:Button name="build-palette-button" text="새로 만들기" />
+                <ui:Button name="load-palette-button" text="불러오기" />
+                <ui:Button name="add-palette-button" text="추가" />
+            </ui:VisualElement>
+            <ui:ScrollView name="palette-element-panel" />
+        </ui:Box>
+    </ui:VisualElement>
+</ui:UXML>

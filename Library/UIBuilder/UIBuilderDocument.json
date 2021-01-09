@@ -15,39 +15,41 @@
                     {
                         "m_StyleSheet": {
                             "fileID": 7433441132597879392,
-                            "guid": "aec5f60d9e337be4caa3df49eadc6ae5",
+                            "guid": "bb8e35da7da3f674c9c79a98a651fc79",
                             "type": 3
                         },
                         "m_Backup": {
                             "instanceID": 0
                         },
-                        "m_OldPath": "Assets/Editor/Dungeon/BuildTileTemplate/BuildTileTemplate.uss"
+                        "m_OldPath": "Assets/Editor/Dungeon/DungeonEditor.uss"
                     }
                 ],
                 "m_VisualTreeAssetBackup": {
                     "instanceID": 0
                 },
-                "m_OpenendVisualTreeAssetOldPath": "Assets/Editor/Dungeon/BuildTileTemplate/BuildTileTemplate.uxml",
+                "m_OpenendVisualTreeAssetOldPath": "Assets/Editor/Dungeon/DungeonEditor.uxml",
                 "m_VisualTreeAsset": {
                     "fileID": 9197481963319205126,
-                    "guid": "d6389d03835ef67469475f4c94da87df",
+                    "guid": "424fc7798b6bcb64fa714d8ef735606c",
                     "type": 3
                 },
                 "m_ActiveStyleSheet": {
-                    "instanceID": 0
+                    "fileID": 7433441132597879392,
+                    "guid": "bb8e35da7da3f674c9c79a98a651fc79",
+                    "type": 3
                 },
                 "m_Settings": {
-                    "UxmlGuid": "d6389d03835ef67469475f4c94da87df",
-                    "UxmlPath": "Assets/Editor/Dungeon/BuildTileTemplate/BuildTileTemplate.uxml",
+                    "UxmlGuid": "424fc7798b6bcb64fa714d8ef735606c",
+                    "UxmlPath": "Assets/Editor/Dungeon/DungeonEditor.uxml",
                     "CanvasX": 0,
                     "CanvasY": 0,
-                    "CanvasWidth": 200,
-                    "CanvasHeight": 200,
+                    "CanvasWidth": 674,
+                    "CanvasHeight": 450,
                     "MatchGameView": false,
-                    "ZoomScale": 1.75,
+                    "ZoomScale": 1.25,
                     "PanOffset": {
-                        "x": 233.63290405273438,
-                        "y": 218.26657104492188
+                        "x": 217.82135009765626,
+                        "y": 140.2677459716797
                     },
                     "ColorModeBackgroundOpacity": 1.0,
                     "ImageModeCanvasBackgroundOpacity": 1.0,

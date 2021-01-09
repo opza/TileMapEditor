@@ -57,5 +57,13 @@ namespace Editor.Utility
 
             return gridElements;
         }
+
+        public static void SetBordersColor(this IStyle style, StyleColor styleColor)
+        {
+            style.borderBottomColor = styleColor;
+            style.borderLeftColor = styleColor;
+            style.borderRightColor = styleColor;
+            style.borderTopColor = styleColor;
+        }
     }
 }

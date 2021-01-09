@@ -66,6 +66,9 @@
     <Compile Include="Assets\Editor\TileSet\TileDrawer.cs" />
     <Compile Include="Assets\Editor\Dungeon\DungeonEditor.cs" />
     <Compile Include="Assets\Editor\Utility\Extention.cs" />
+    <Compile Include="Assets\Editor\Dungeon\Draw\IDrawer.cs" />
+    <Compile Include="Assets\Editor\Dungeon\Draw\DotDrawer.cs" />
+    <Compile Include="Assets\Editor\Dungeon\Draw\LineDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Editor\Dungeon\DungeonEditor.uxml" />
