@@ -5,65 +5,48 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
+using UnityEditor.UIElements;
+
+using Worlds;
+using Editor.Utility;
 
 // TODO : UI Toolkit 및 자동으로 타일을 Split하게 바꿔야함
 
-namespace Worlds
+[CustomPropertyDrawer(typeof(TileSet.TileSetElement))]
+public class TileDrawer : PropertyDrawer
 {
-    [CustomPropertyDrawer(typeof(TileSet.TileSetElement))]
-    public class TileDrawer:PropertyDrawer
+    readonly string MAIN_UXML_PATH = "Assets/Editor/TileSet/TileDrawer.uxml";
+
+    PropertyField spriteField;
+    List<Toggle> maskToggles;
+
+    public override VisualElement CreatePropertyGUI(SerializedProperty property)
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        var mainVisulTree = Loader.LoadUxml(MAIN_UXML_PATH);
+
+        var root = new VisualElement();
+        root.Add(mainVisulTree.CloneTree());
+
+        Init(root, property);
+
+        return root;
+    }
+
+    void Init(VisualElement root, SerializedProperty property)
+    {
+        spriteField = root.Query<PropertyField>("sprite-field").First();
+        maskToggles = root.Query<Toggle>(className: "mask-toggle").ToList();
+
+        var spriteProperty = property.FindPropertyRelative("sprite");
+        var maskProperty = property.FindPropertyRelative("mask");
+
+        spriteField.BindProperty(spriteProperty);
+
+        for (int i = 0; i < maskToggles.Count; i++)
         {
-
-            using(new EditorGUI.PropertyScope(position, label, property))
-            {
-                var maskProp = property.FindPropertyRelative("mask");
-                DrawDirectionMask(maskProp, position, 10, 10, 15, 15);
-
-                var spriteProp = property.FindPropertyRelative("sprite");
-                var spritePos = new Rect(position);
-                spritePos.x += 50;
-                DrawSpriteField(spriteProp, spritePos, 40, 40);
-            }
+            maskToggles[i].BindProperty(maskProperty.GetArrayElementAtIndex(i));
         }
 
-        void DrawDirectionMask(SerializedProperty maskProp, Rect position, float width, float height, float xDistance, float yDistance)
-        {
-            var idx = 0;
-            for (int y = 0; y < 3; y++)
-            {
-                for (int x = 0; x < 3; x++)
-                {
-                    var boxRect = new Rect(position.x + x * xDistance, position.y + y * yDistance, width, height);
-
-                    if (y == 1 && x == 1)
-                    {
-                        boxRect.width += 4;
-                        boxRect.height += 5;
-
-                        EditorGUI.DrawRect(boxRect, Color.green);
-                        continue;
-                    }
-               
-                    var bitMask = maskProp.GetArrayElementAtIndex(idx++);
-                    bitMask.boolValue = EditorGUI.Toggle(boxRect, bitMask.boolValue);
-                }
-            }
-        }
-
-        void DrawSpriteField(SerializedProperty spriteProp, Rect position, float width, float height)
-        {
-            var spriteRect = new Rect(position.x, position.y, width, height);
-            spriteProp.objectReferenceValue = EditorGUI.ObjectField(spriteRect, spriteProp.objectReferenceValue, typeof(Sprite), false);
-        }
-
-        void ClearMask(SerializedProperty maskProp)
-        {
-            for (int i = 0; i < maskProp.arraySize; i++)
-            {
-                maskProp.GetArrayElementAtIndex(i).boolValue = false;
-            }
-        }
     }
 }
+

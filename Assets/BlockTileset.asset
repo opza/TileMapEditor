@@ -13,49 +13,16 @@ MonoBehaviour:
   m_Name: BlockTileset
   m_EditorClassIdentifier: 
   tileName: BlockTileset
-  isOnlyCross: 1
+  onlyCross: 0
   tileSetElements:
   - sprite: {fileID: -8213782765776912250, guid: 340d5d260a8edc443af6c5ff565eb29f,
       type: 3}
+    mask: 0000000000010001
+  - sprite: {fileID: 0}
     mask: 0000000000000000
-  - sprite: {fileID: -8518063296010493290, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0000000000000100
-  - sprite: {fileID: -8871038989383191861, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0000000001000000
-  - sprite: {fileID: 3637694436591301765, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0000000101000000
-  - sprite: {fileID: -8921557701501664739, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0000000100000000
   - sprite: {fileID: 658610804543150169, guid: 340d5d260a8edc443af6c5ff565eb29f, type: 3}
-    mask: 0001000000000000
-  - sprite: {fileID: 1303555410413672225, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0000000001000100
-  - sprite: {fileID: -3462126092104230500, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0000000101000100
-  - sprite: {fileID: 8568142618917566389, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0001000001000000
-  - sprite: {fileID: -8082063572214372527, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0001000101000000
-  - sprite: {fileID: -8082063572214372527, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0000000101000100
-  - sprite: {fileID: -9220975972155412195, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0001000100000000
-  - sprite: {fileID: 3818911086006376876, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0000000100000100
-  - sprite: {fileID: 3253857429519456842, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0001000101000100
-  - sprite: {fileID: 3253857429519456842, guid: 340d5d260a8edc443af6c5ff565eb29f,
-      type: 3}
-    mask: 0001000000000100
+    mask: 0000010000000000
+  - sprite: {fileID: 0}
+    mask: 0000000000000000
+  - sprite: {fileID: 0}
+    mask: 0000000000000000

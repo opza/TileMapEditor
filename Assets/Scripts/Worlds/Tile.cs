@@ -97,7 +97,7 @@ namespace Worlds
                 if (neighborTile?.block?.BlockInfo.Name == block.BlockInfo.Name)
                 {
 
-                    if (!block.BlockInfo.TileSet.IsOnlyCross || (block.BlockInfo.TileSet.IsOnlyCross && crossNeighborTiles.Contains(neighborTile)))
+                    if (!block.BlockInfo.TileSet.OnlyCross || (block.BlockInfo.TileSet.OnlyCross && crossNeighborTiles.Contains(neighborTile)))
                     {
                         thisTileMask |= neighborDirMask;
                     }
@@ -105,7 +105,7 @@ namespace Worlds
                 neighborDirMask <<= 1;
             }
 
-            if (block.BlockInfo.TileSet.IsOnlyCross)
+            if (block.BlockInfo.TileSet.OnlyCross)
                 thisTileMask &= 0b_0101_1010;
 
             block.Mask = thisTileMask;
@@ -128,7 +128,7 @@ namespace Worlds
                 if (neighborTile?.block?.BlockInfo.Name == block.BlockInfo.Name)
                 {
 
-                    if (!block.BlockInfo.TileSet.IsOnlyCross || (block.BlockInfo.TileSet.IsOnlyCross && crossNeighborTiles.Contains(neighborTile)))
+                    if (!block.BlockInfo.TileSet.OnlyCross || (block.BlockInfo.TileSet.OnlyCross && crossNeighborTiles.Contains(neighborTile)))
                     {
                         neighborTile.block.Mask |= neighborMask;
 

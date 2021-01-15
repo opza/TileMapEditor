@@ -98,4 +98,36 @@ namespace Util.SerializableObjects
             return true;
         }
     }
+
+    [Serializable]
+    public class SerializableDictionary<TKey, TValue>
+    {
+        [SerializeField]
+        List<TKey> keys = new List<TKey>();
+
+        [SerializeField]
+        List<TValue> values = new List<TValue>();
+
+        public SerializableDictionary(Dictionary<TKey, TValue> dic)
+        {
+            keys = dic.Keys.ToList();
+            values = dic.Values.ToList();
+        }
+
+        public Dictionary<TKey, TValue> ToDictionary()
+        {
+            var deSerializedDictionary = new Dictionary<TKey, TValue>();
+
+            if (keys.Count != values.Count)
+                return deSerializedDictionary;
+
+            for (int i = 0; i < keys.Count; i++)
+            {
+                deSerializedDictionary[keys[i]] = values[i];
+            }
+
+            return deSerializedDictionary;
+        }
+       
+    }
 }

@@ -51,6 +51,24 @@ namespace Editor.Utility
             var texture2D = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
             return texture2D;
         }
+
+        public static Dictionary<string, Sprite> LoadSprites(string path)
+        {
+            var sprites = new Dictionary<string, Sprite>();
+
+            var objects = AssetDatabase.LoadAllAssetsAtPath(path);
+            foreach (var obj in objects)
+            {
+                if (!(obj is Sprite))
+                    continue;
+
+                sprites[obj.name] = obj as Sprite;
+            }
+
+            return sprites;
+        }
+
+
     }
 
     

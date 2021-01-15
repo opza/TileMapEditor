@@ -17,14 +17,27 @@ namespace Worlds
         public string TileName => tileName;
 
         [SerializeField]
-        bool isOnlyCross;
-        public bool IsOnlyCross => isOnlyCross;
+        bool onlyCross;
+        public bool OnlyCross => onlyCross;
 
         [SerializeField]
         List<TileSetElement> tileSetElements = new List<TileSetElement>();
+        
 
         public Sprite this[byte mask] => GetTileElement(mask);
         public Sprite Default => tileSetElements[0]?.Sprite;
+
+        public void AddEmpty() => tileSetElements.Add(new TileSetElement());
+
+        public void Add(bool[] mask, Sprite sprite) => tileSetElements.Add(new TileSetElement(mask, sprite));
+
+        public void RemoveAt(int index)
+        {
+            if (index < 0 || index >= tileSetElements.Count)
+                return;
+
+            tileSetElements.RemoveAt(index);
+        }
 
         public Sprite GetTileElement(byte mask)
         {
@@ -54,7 +67,13 @@ namespace Worlds
 
             public TileSetElement()
             {
+                mask = new bool[8];
+            }
 
+            public TileSetElement(bool[] mask, Sprite sprite)
+            {
+                this.mask = mask;
+                this.sprite = sprite;
             }
 
             void ISerializationCallbackReceiver.OnBeforeSerialize()

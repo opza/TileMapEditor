@@ -29,7 +29,7 @@ namespace Editor.Dungeon
             wnd.titleContent = new GUIContent("DungeonEditor");
         }
 
-        public void OnEnable()
+        void OnEnable()
         {
             VisualElement root = rootVisualElement;
             SetMainTree(root);

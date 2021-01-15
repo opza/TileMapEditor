@@ -56,27 +56,32 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\Dungeon\Drawer\IDrawer.cs" />
     <Compile Include="Assets\Editor\Dungeon\DungeonEditor_TileMenu.cs" />
     <Compile Include="Assets\Editor\Dungeon\Inspector\RoomInspector.cs" />
     <Compile Include="Assets\Editor\Dungeon\DungeonEditor_PaletteMenu.cs" />
     <Compile Include="Assets\Editor\TileSet\TileSetInspector.cs" />
     <Compile Include="Assets\Editor\Dungeon\Palette.cs" />
+    <Compile Include="Assets\Editor\Dungeon\Drawer\DotDrawer.cs" />
     <Compile Include="Assets\Editor\Dungeon\Inspector\PaletteInspector.cs" />
     <Compile Include="Assets\Editor\Utility\Utils.cs" />
     <Compile Include="Assets\Editor\TileSet\TileDrawer.cs" />
     <Compile Include="Assets\Editor\Dungeon\DungeonEditor.cs" />
     <Compile Include="Assets\Editor\Utility\Extention.cs" />
-    <Compile Include="Assets\Editor\Dungeon\Draw\IDrawer.cs" />
-    <Compile Include="Assets\Editor\Dungeon\Draw\DotDrawer.cs" />
-    <Compile Include="Assets\Editor\Dungeon\Draw\LineDrawer.cs" />
+    <Compile Include="Assets\Editor\Dungeon\Drawer\LineDrawer.cs" />
+    <Compile Include="Assets\Editor\TileSet\TileAutoGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Editor\Dungeon\DungeonEditor.uxml" />
+     <None Include="Assets\Editor\TileSet\TileSet.uss" />
      <None Include="Assets\Editor\Dungeon\PaletteElementTemplate\PaletteElementTemplate.uxml" />
+     <None Include="Assets\Editor\TileSet\TileDrawer.uss" />
      <None Include="Assets\Editor\Dungeon\PaletteElementTemplate\PaletteElementTemplate.uss" />
      <None Include="Assets\Editor\Dungeon\BuildTileTemplate\BuildTileTemplate.uxml" />
+     <None Include="Assets\Editor\TileSet\TileDrawer.uxml" />
      <None Include="Assets\Editor\Dungeon\DungeonEditor.uss" />
      <None Include="Assets\Editor\Dungeon\BuildTileTemplate\BuildTileTemplate.uss" />
+     <None Include="Assets\Editor\TileSet\TileSet.uxml" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.0f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

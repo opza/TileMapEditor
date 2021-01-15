@@ -6,6 +6,23 @@ namespace Util
 {
     public static class Extention
     {
+        public static bool[] ToMask(this string stringMask)
+        {
+            const int maskLength = 8;
+
+            if (stringMask.Length != maskLength)
+                return new bool[0];
+
+            var mask = new bool[maskLength];
+            for (int i = 0; i < maskLength; i++)
+            {
+                if (!bool.TryParse(stringMask[i].ToString(), out mask[i]))
+                    return new bool[0];
+            }
+
+            return mask;
+        }
+
         public static byte ToByte(this bool[] boolMask)
         {
             byte b = 0x00;
