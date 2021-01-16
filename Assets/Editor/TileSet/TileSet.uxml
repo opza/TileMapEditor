@@ -11,15 +11,4 @@
         <ui:Button text="Add Tile Rule" display-tooltip-when-elided="true" name="add-tile-button" />
         <ui:Button text="Remove Tile Rule" display-tooltip-when-elided="true" name="remove-tile-button" />
     </ui:VisualElement>
-    <ui:VisualElement name="auto-generate-panel" style="border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-top-left-radius: 1px; border-bottom-left-radius: 1px; border-top-right-radius: 1px; border-bottom-right-radius: 1px;">
-        <ui:VisualElement class="load-generate-info-panel" style="flex-direction: row;">
-            <ui:TextField name="tile-set-sprite-folder-path-field" picking-mode="Ignore" label="TileSet Sprite Folder" class="generate-info-path-field" style="justify-content: flex-end;" />
-            <ui:Button name="load-tile-set-sprite-folder-button" text="Open" display-tooltip-when-elided="true" class="generate-load-button" style="align-items: auto;" />
-        </ui:VisualElement>
-        <ui:VisualElement class="load-generate-info-panel" style="flex-direction: row;">
-            <ui:TextField name="tile-rule-json-path-field" picking-mode="Ignore" label="TileRule Json" class="generate-info-path-field" style="justify-content: flex-end;" />
-            <ui:Button name="load-tile-rule-json-button" text="Open" display-tooltip-when-elided="true" class="generate-load-button" />
-        </ui:VisualElement>
-        <ui:Button text="Auto Generate" display-tooltip-when-elided="true" name="auto-generate-button" style="display: flex;" />
-    </ui:VisualElement>
 </ui:UXML>

@@ -25,13 +25,13 @@ namespace Editor.Dungeon
         [MenuItem("Window/DungeonEditor")]
         public static void ShowWindow()
         {
-            DungeonEditor wnd = GetWindow<DungeonEditor>();
+            var wnd = GetWindow<DungeonEditor>();
             wnd.titleContent = new GUIContent("DungeonEditor");
         }
 
         void OnEnable()
         {
-            VisualElement root = rootVisualElement;
+            var root = rootVisualElement;
             SetMainTree(root);
 
             paletteElementTree = Loader.LoadUxml(PALETTE_ELEMENT_UXML_PATH);

@@ -1,0 +1,35 @@
+#auto-generate-panel {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    height: 80%;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+.load-generate-info-panel {
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.generate-info-path-field {
+    font-size: 100%;
+    width: 80%;
+}
+
+.generate-load-button {
+    width: 15%;
+}
+
+#build-format-panel {
+    height: 20%;
+    padding-top: 0;
+    margin-top: 5%;
+}

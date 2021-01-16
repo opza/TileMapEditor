@@ -16,9 +16,10 @@ using Editor.Utility;
 public class TileDrawer : PropertyDrawer
 {
     readonly string MAIN_UXML_PATH = "Assets/Editor/TileSet/TileDrawer.uxml";
+    readonly int MASK_LENGTH = 8;
 
     PropertyField spriteField;
-    List<Toggle> maskToggles;
+    Toggle[] maskToggles;
 
     public override VisualElement CreatePropertyGUI(SerializedProperty property)
     {
@@ -35,14 +36,18 @@ public class TileDrawer : PropertyDrawer
     void Init(VisualElement root, SerializedProperty property)
     {
         spriteField = root.Query<PropertyField>("sprite-field").First();
-        maskToggles = root.Query<Toggle>(className: "mask-toggle").ToList();
+        maskToggles = new Toggle[MASK_LENGTH];
+        for (int i = 0; i < MASK_LENGTH; i++)
+        {
+            maskToggles[i] = root.Query<Toggle>($"mask-{i}-toggle").First();
+        }
 
         var spriteProperty = property.FindPropertyRelative("sprite");
         var maskProperty = property.FindPropertyRelative("mask");
 
         spriteField.BindProperty(spriteProperty);
 
-        for (int i = 0; i < maskToggles.Count; i++)
+        for (int i = 0; i < MASK_LENGTH; i++)
         {
             maskToggles[i].BindProperty(maskProperty.GetArrayElementAtIndex(i));
         }

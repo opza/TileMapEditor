@@ -101,32 +101,44 @@ namespace Util.SerializableObjects
 
     [Serializable]
     public class SerializableDictionary<TKey, TValue>
-    {
+    {       
         [SerializeField]
-        List<TKey> keys = new List<TKey>();
-
-        [SerializeField]
-        List<TValue> values = new List<TValue>();
+        List<Element> elements = new List<Element>();
 
         public SerializableDictionary(Dictionary<TKey, TValue> dic)
         {
-            keys = dic.Keys.ToList();
-            values = dic.Values.ToList();
+            foreach (var keyValuePair in dic)
+            {
+                elements.Add(new Element(keyValuePair));
+            }
         }
 
         public Dictionary<TKey, TValue> ToDictionary()
         {
-            var deSerializedDictionary = new Dictionary<TKey, TValue>();
+            return elements.ToDictionary(e => e.Key, e => e.Value);
+        }
 
-            if (keys.Count != values.Count)
-                return deSerializedDictionary;
+        [Serializable]
+        class Element
+        {
+            [SerializeField]
+            TKey key;
+            public TKey Key => key;
 
-            for (int i = 0; i < keys.Count; i++)
+            [SerializeField]
+            TValue value;
+            public TValue Value => value;
+
+            public Element(KeyValuePair<TKey, TValue> keyValuePair):this(keyValuePair.Key, keyValuePair.Value)
             {
-                deSerializedDictionary[keys[i]] = values[i];
+
             }
 
-            return deSerializedDictionary;
+            public Element(TKey key, TValue value)
+            {
+                this.key = key;
+                this.value = value;
+            }
         }
        
     }

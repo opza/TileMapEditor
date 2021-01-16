@@ -89,7 +89,7 @@ namespace Worlds
                 return;
 
             byte thisTileMask = 0x00;
-            byte neighborDirMask = 0x01;
+            byte neighborDirMask = 0x80;
 
 
             foreach (var neighborTile in neighborTiles)
@@ -101,8 +101,11 @@ namespace Worlds
                     {
                         thisTileMask |= neighborDirMask;
                     }
+
+
+
                 }
-                neighborDirMask <<= 1;
+                neighborDirMask >>= 1;
             }
 
             if (block.BlockInfo.TileSet.OnlyCross)
@@ -119,9 +122,7 @@ namespace Worlds
             if (!HasBlock)
                 return;
 
-            byte neighborDirMask = 0x01;
-
-            byte neighborMask = 0x80;
+            byte neighborMask = 0x01;
 
             foreach (var neighborTile in neighborTiles)
             {
@@ -137,9 +138,7 @@ namespace Worlds
                     }
 
                 }
-
-                neighborDirMask <<= 1;
-                neighborMask >>= 1;
+                neighborMask <<= 1;
             }
         }
 

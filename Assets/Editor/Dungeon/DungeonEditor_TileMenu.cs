@@ -129,7 +129,7 @@ namespace Editor.Dungeon
                 return currentRoom;       
 
             var savePath = EditorUtility.SaveFilePanel("Room 생성", Application.dataPath, "NewRoom", ROOM_FILE_EXTENTION);
-            var relativePath = Path.ConvertUnityRelativePath(savePath);
+            var relativePath = Path.ConvertAbsoluteToUnityRelativePath(savePath);
             if (string.IsNullOrEmpty(relativePath))
                 return currentRoom;
 
@@ -144,7 +144,7 @@ namespace Editor.Dungeon
 
         Room LoadRoom(string path)
         {
-            var relativePath = Path.ConvertUnityRelativePath(path);
+            var relativePath = Path.ConvertAbsoluteToUnityRelativePath(path);
             if (string.IsNullOrEmpty(relativePath))
                 return currentRoom;
 

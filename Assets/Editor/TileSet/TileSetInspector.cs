@@ -10,70 +10,6 @@ using UnityEditor.UIElements;
 using Editor.Utility;
 using Worlds;
 
-
-////[CustomEditor(typeof(TileSet))]
-//public class TileSetInspector : UnityEditor.Editor
-//{
-//    const int TILE_NAME_FIELD_WIDTH = 250;
-//    const int TILE_NAME_FIELD_HEIGHT = 20;
-
-//    ReorderableList tileSetElements;
-
-//    SerializedProperty serializedTileName;
-//    SerializedProperty serializedIsOnlyCross;
-//    SerializedProperty serializedTileSetElementsProp;
-
-//    private void OnEnable()
-//    {
-//        serializedTileName = serializedObject.FindProperty("tileName");
-//        serializedIsOnlyCross = serializedObject.FindProperty("isOnlyCross");
-//        serializedTileSetElementsProp = serializedObject.FindProperty("tileSetElements");
-
-//        tileSetElements = new ReorderableList(
-//            serializedObject,
-//            serializedTileSetElementsProp,
-//            true,
-//            true,
-//            true,
-//            true);
-
-//        tileSetElements.headerHeight = 100;
-//        tileSetElements.elementHeight = 50;
-
-//        tileSetElements.drawHeaderCallback = DrawHeader;
-//        tileSetElements.drawElementCallback = DrawElement;
-
-//    }
-
-//    public override void OnInspectorGUI()
-//    {
-//        serializedObject.Update();
-//        tileSetElements.DoLayoutList();
-//        serializedObject.ApplyModifiedProperties();
-//    }
-
-//    void DrawHeader(Rect rect)
-//    {
-//        EditorGUI.LabelField(rect, "TileSet Name");
-
-//        var isOnlyCrossToggleRect = new Rect(rect.x, rect.y + 25, 20, 20);
-//        serializedIsOnlyCross.boolValue = EditorGUI.Toggle(isOnlyCrossToggleRect, "IsOnlyCross", serializedIsOnlyCross.boolValue);
-
-//        var tileNameFieldRect = new Rect(rect.x, rect.y + 70, TILE_NAME_FIELD_WIDTH, TILE_NAME_FIELD_HEIGHT);
-//        serializedTileName.stringValue = EditorGUI.TextField(tileNameFieldRect, serializedTileName.stringValue);
-//    }
-
-//    void DrawElement(Rect rect, int index, bool isActive, bool isFocused)
-//    {
-//        var element = serializedTileSetElementsProp.GetArrayElementAtIndex(index);
-//        EditorGUI.PropertyField(rect, element);
-
-//    }
-
-
-//}
-
-
 [CustomEditor(typeof(TileSet))]
 public class TileSetInspector_Test : UnityEditor.Editor
 {
@@ -90,11 +26,7 @@ public class TileSetInspector_Test : UnityEditor.Editor
     Button addTilesButton;
     Button removeTileButton;
 
-    TextField tileSetSpriteFolderPathField;
-    TextField tileRuleJsonPathField;
-    Button loadTileSetSpriteButton;
-    Button loadTileRuleJsonButton;
-    Button autoGenerateButton;
+    
 
     private void OnEnable()
     {
@@ -106,7 +38,6 @@ public class TileSetInspector_Test : UnityEditor.Editor
         root.Add(mainVisualTree.CloneTree());
 
         InitTileSet(root);
-        InitTileSetGenerator(root);
     }
 
     public override VisualElement CreateInspectorGUI()
@@ -125,9 +56,11 @@ public class TileSetInspector_Test : UnityEditor.Editor
 
         tileNameField.BindProperty(serializedObject.FindProperty("tileName"));
         onlyCrossToggle.BindProperty(serializedObject.FindProperty("onlyCross"));
+        
 
         var serializedTileSetElements = serializedObject.FindProperty("tileSetElements");
 
+        tilesListView.makeItem += () => new PropertyField();
         tilesListView.bindItem = (e, i) =>
         {
             if (i >= serializedTileSetElements.arraySize)
@@ -141,16 +74,5 @@ public class TileSetInspector_Test : UnityEditor.Editor
         removeTileButton.clickable.clicked += () => tileSet.RemoveAt(tilesListView.selectedIndex);
     }
 
-    void InitTileSetGenerator(VisualElement root)
-    {
-        tileSetSpriteFolderPathField = root.Query<TextField>("tile-set-sprite-folder-path-field").First();
-        tileRuleJsonPathField = root.Query<TextField>("tile-rule-json-path-field").First();
 
-        loadTileSetSpriteButton = root.Query<Button>("load-tile-set-sprite-folder-button").First();
-        loadTileRuleJsonButton = root.Query<Button>("load-tile-rule-json-button").First();
-        autoGenerateButton = root.Query<Button>("auto-generate-button").First();
-
-
-
-    }
 }

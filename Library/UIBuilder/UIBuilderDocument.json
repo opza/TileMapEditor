@@ -15,39 +15,41 @@
                     {
                         "m_StyleSheet": {
                             "fileID": 7433441132597879392,
-                            "guid": "d37eb2dc2228a074abb7754ad2981745",
+                            "guid": "fb593f06e2282c2458569570e506b81e",
                             "type": 3
                         },
                         "m_Backup": {
                             "instanceID": 0
                         },
-                        "m_OldPath": "Assets/Editor/TileSet/TileSet.uss"
+                        "m_OldPath": "Assets/Editor/TileSet/AutoGenerator/AutoTileRuleEditor.uss"
                     }
                 ],
                 "m_VisualTreeAssetBackup": {
                     "instanceID": 0
                 },
-                "m_OpenendVisualTreeAssetOldPath": "Assets/Editor/TileSet/TileSet.uxml",
+                "m_OpenendVisualTreeAssetOldPath": "Assets/Editor/TileSet/AutoGenerator/AutoTileRuleEditor.uxml",
                 "m_VisualTreeAsset": {
                     "fileID": 9197481963319205126,
-                    "guid": "cfe4daa16d3bba74bb2b411fea6021db",
+                    "guid": "f7e8804e497bad04e9b2875000a8a982",
                     "type": 3
                 },
                 "m_ActiveStyleSheet": {
-                    "instanceID": 0
+                    "fileID": 7433441132597879392,
+                    "guid": "fb593f06e2282c2458569570e506b81e",
+                    "type": 3
                 },
                 "m_Settings": {
-                    "UxmlGuid": "cfe4daa16d3bba74bb2b411fea6021db",
-                    "UxmlPath": "Assets/Editor/TileSet/TileSet.uxml",
+                    "UxmlGuid": "f7e8804e497bad04e9b2875000a8a982",
+                    "UxmlPath": "Assets/Editor/TileSet/AutoGenerator/AutoTileRuleEditor.uxml",
                     "CanvasX": 0,
                     "CanvasY": 0,
                     "CanvasWidth": 350,
-                    "CanvasHeight": 623,
+                    "CanvasHeight": 135,
                     "MatchGameView": false,
-                    "ZoomScale": 1.0,
+                    "ZoomScale": 1.5,
                     "PanOffset": {
-                        "x": 41.451683044433597,
-                        "y": -78.689453125
+                        "x": 125.74163818359375,
+                        "y": 184.95135498046876
                     },
                     "ColorModeBackgroundOpacity": 1.0,
                     "ImageModeCanvasBackgroundOpacity": 1.0,

@@ -10,19 +10,75 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5c564d164169c94d910dc9dc34a3d3c, type: 3}
-  m_Name: BlockTileset
+  m_Name: BlockTileSet
   m_EditorClassIdentifier: 
-  tileName: BlockTileset
-  onlyCross: 0
+  tileName: BlockTileSet
+  onlyCross: 1
   tileSetElements:
-  - sprite: {fileID: -8213782765776912250, guid: 340d5d260a8edc443af6c5ff565eb29f,
+  - sprite: {fileID: -8213782765776912250, guid: 7745d43ec0c87a84cafbca53724d185a,
       type: 3}
-    mask: 0000000000010001
-  - sprite: {fileID: 0}
     mask: 0000000000000000
-  - sprite: {fileID: 658610804543150169, guid: 340d5d260a8edc443af6c5ff565eb29f, type: 3}
-    mask: 0000010000000000
-  - sprite: {fileID: 0}
-    mask: 0000000000000000
-  - sprite: {fileID: 0}
-    mask: 0000000000000000
+  - sprite: {fileID: -8518063296010493290, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000000000100
+  - sprite: {fileID: -8871038989383191861, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000001000000
+  - sprite: {fileID: 3637694436591301765, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0001000101000100
+  - sprite: {fileID: -8921557701501664739, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000100000000
+  - sprite: {fileID: 658610804543150169, guid: 7745d43ec0c87a84cafbca53724d185a, type: 3}
+    mask: 0001000000000000
+  - sprite: {fileID: 1303555410413672225, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000001000100
+  - sprite: {fileID: -3462126092104230500, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000101000000
+  - sprite: {fileID: 3818911086006376876, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000100000100
+  - sprite: {fileID: -2968160521145883719, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000001000101
+  - sprite: {fileID: -8082063572214372527, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000101010101
+  - sprite: {fileID: -8265232490957100610, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000100010100
+  - sprite: {fileID: -3293226114871820431, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0001000000000100
+  - sprite: {fileID: 3253857429519456842, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0001000000000100
+  - sprite: {fileID: -92138599614758986, guid: 7745d43ec0c87a84cafbca53724d185a, type: 3}
+    mask: 0001010001000101
+  - sprite: {fileID: 8886558474639481304, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0101010101010101
+  - sprite: {fileID: -5913383478371155081, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0101000100010100
+  - sprite: {fileID: 8568142618917566389, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0001000001000000
+  - sprite: {fileID: -5142650238756481487, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0000000101000000
+  - sprite: {fileID: -9220975972155412195, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0001000100000000
+  - sprite: {fileID: 8290902767777311385, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0001010001000000
+  - sprite: {fileID: 8872051553670027449, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0101010101000000
+  - sprite: {fileID: -3732473049520515647, guid: 7745d43ec0c87a84cafbca53724d185a,
+      type: 3}
+    mask: 0101000100000000

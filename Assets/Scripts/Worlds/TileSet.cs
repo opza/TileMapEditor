@@ -78,10 +78,15 @@ namespace Worlds
 
             void ISerializationCallbackReceiver.OnBeforeSerialize()
             {
-                
+                maskInit();
             }
 
             void ISerializationCallbackReceiver.OnAfterDeserialize()
+            {
+                maskInit();
+            }
+
+            void maskInit()
             {
                 if (mask == null || mask.Length <= 0)
                     mask = new bool[8];

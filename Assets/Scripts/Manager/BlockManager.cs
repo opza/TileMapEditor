@@ -38,8 +38,6 @@ namespace Worlds
             Tile.changedBlockSpriteEvent += OnChangeBlockSprite;
         }
 
-       
-
         void OnCreateBlock(object sender, CreateBlcokObjectArgs e)
         {
             if (e.Block.BlockInfo.Light == null)

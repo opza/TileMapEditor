@@ -3,19 +3,19 @@
     <ui:VisualElement style="flex-direction: column; height: 113.6px;">
         <ui:VisualElement name="mask-panel">
             <ui:VisualElement style="flex-direction: row;">
-                <ui:Toggle class="mask-toggle" />
-                <ui:Toggle class="mask-toggle" />
-                <ui:Toggle class="mask-toggle" />
+                <ui:Toggle class="mask-toggle" name="mask-0-toggle"/>
+                <ui:Toggle class="mask-toggle" name="mask-1-toggle"/>
+                <ui:Toggle class="mask-toggle" name="mask-2-toggle"/>
             </ui:VisualElement>
             <ui:VisualElement style="flex-direction: row;">
-                <ui:Toggle class="mask-toggle" />
+                <ui:Toggle class="mask-toggle" name="mask-3-toggle"/>
                 <ui:Box name="center-mask" style="width: 14px; height: auto; justify-content: center; -unity-slice-left: 0; margin-left: 3px; margin-right: 3px; margin-top: 4px; margin-bottom: 3px;" />
-                <ui:Toggle class="mask-toggle" />
+                <ui:Toggle class="mask-toggle" name="mask-4-toggle"/>
             </ui:VisualElement>
             <ui:VisualElement style="flex-direction: row;">
-                <ui:Toggle class="mask-toggle" />
-                <ui:Toggle class="mask-toggle" />
-                <ui:Toggle class="mask-toggle" />
+                <ui:Toggle class="mask-toggle" name="mask-5-toggle"/>
+                <ui:Toggle class="mask-toggle" name="mask-6-toggle"/>
+                <ui:Toggle class="mask-toggle" name="mask-7-toggle"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="sprite-panel" style="flex-direction: row;">

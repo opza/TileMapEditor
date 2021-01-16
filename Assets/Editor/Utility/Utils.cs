@@ -22,7 +22,7 @@ namespace Editor.Utility
 
     public static class Path
     {
-        public static string ConvertUnityRelativePath(string absoultePath)
+        public static string ConvertAbsoluteToUnityRelativePath(string absoultePath)
         {
             var matchedPath = Regex.Match(absoultePath, @"Assets/.*");
             if (!matchedPath.Success)
@@ -54,18 +54,12 @@ namespace Editor.Utility
 
         public static Dictionary<string, Sprite> LoadSprites(string path)
         {
-            var sprites = new Dictionary<string, Sprite>();
+            path = path.Replace("Assets/Resources", string.Empty);
+            if (string.IsNullOrEmpty(path))
+                path = "/";
 
-            var objects = AssetDatabase.LoadAllAssetsAtPath(path);
-            foreach (var obj in objects)
-            {
-                if (!(obj is Sprite))
-                    continue;
-
-                sprites[obj.name] = obj as Sprite;
-            }
-
-            return sprites;
+            var sprites = Resources.LoadAll<Sprite>(path);
+            return sprites.ToDictionary(sprite => sprite.name);
         }
 
 

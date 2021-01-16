@@ -65,7 +65,7 @@ namespace Editor.Dungeon
             var newPalette = CreateInstance<Palette>();
 
             var savePath = EditorUtility.SaveFilePanel("Palette 생성", Application.dataPath, "NewPalette", PALETTE_FILE_EXTENTION);
-            var relativePath = Utility.Path.ConvertUnityRelativePath(savePath);
+            var relativePath = Utility.Path.ConvertAbsoluteToUnityRelativePath(savePath);
             if (string.IsNullOrEmpty(relativePath))
                 return currentPalette;
             
@@ -76,9 +76,9 @@ namespace Editor.Dungeon
             return newPalette;
         }
 
-        BlockInfo LoadBlockInfo(string path)
+        BlockInfo LoadBlockInfo(string absolutePath)
         {
-            var relativePath = Utility.Path.ConvertUnityRelativePath(path);
+            var relativePath = Utility.Path.ConvertAbsoluteToUnityRelativePath(absolutePath);
             if (string.IsNullOrEmpty(relativePath))
                 return null;
 
@@ -93,9 +93,9 @@ namespace Editor.Dungeon
 
         }
 
-        Palette LoadPalette(string path)
+        Palette LoadPalette(string absolutePath)
         {
-            var relativePath = Utility.Path.ConvertUnityRelativePath(path);
+            var relativePath = Utility.Path.ConvertAbsoluteToUnityRelativePath(absolutePath);
             if (string.IsNullOrEmpty(relativePath))
                 return currentPalette;
 

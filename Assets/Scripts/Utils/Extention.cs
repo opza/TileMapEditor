@@ -10,14 +10,15 @@ namespace Util
         {
             const int maskLength = 8;
 
+            stringMask = stringMask.Replace(" ", string.Empty);
+
             if (stringMask.Length != maskLength)
                 return new bool[0];
 
             var mask = new bool[maskLength];
             for (int i = 0; i < maskLength; i++)
             {
-                if (!bool.TryParse(stringMask[i].ToString(), out mask[i]))
-                    return new bool[0];
+                mask[i] = stringMask[i] == '1';
             }
 
             return mask;
@@ -28,7 +29,7 @@ namespace Util
             byte b = 0x00;
             byte mask = 0x01;
 
-            for (int i = 0; i < boolMask.Length; i++)
+            for (int i = boolMask.Length - 1; i >= 0 ; i--)
             {
                 if (boolMask[i])
                     b |= mask;
@@ -42,9 +43,9 @@ namespace Util
         {
             byte b = 0;
 
-            for (int i = 0; i < boolMask.GetLength(0); i++)
+            for (int i = boolMask.GetLength(0) - 1; i >= 0 ; i--)
             {
-                for (int j = 0; j < boolMask.GetLength(1); j++)
+                for (int j = boolMask.GetLength(1) - 1; j >= 0; j--)
                 {
                     if (boolMask[i, j])
                         b |= 1;

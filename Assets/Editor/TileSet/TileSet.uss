@@ -14,30 +14,3 @@
 #tiles-list-view {
     height: 100%;
 }
-
-#auto-generate-panel {
-    border-left-width: 2px;
-    border-right-width: 2px;
-    border-top-width: 2px;
-    border-bottom-width: 2px;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    height: 30%;
-    padding-top: 10%;
-}
-
-.load-generate-info-panel {
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.generate-info-path-field {
-    font-size: 100%;
-    width: 80%;
-}
-
-.generate-load-button {
-    width: 15%;
-}
